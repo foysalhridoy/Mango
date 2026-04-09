@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mango - আমের রাজ্য</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+<style>
+/* ===== LIGHT MODE VARIABLES ===== */
+:root {
+  --mango-yellow: #FFB800;
+  --mango-deep: #FF8C00;
+  --mango-orange: #FF6B1A;
+  --mango-green: #2D8B00;
+  --mango-light-green: #5CB85C;
+  --mango-cream: #FFF8E7;
+  --mango-gold: #E8A000;
+  --mango-dark: #1A0A00;
+  --mango-brown: #4A2800;
+  --text-primary: #1A0A00;
+  --text-secondary: #5C3D1E;
+  --text-light: #8B6040;
+  --bg-light: #FFFDF5;
+  --bg-card: #FFFFFF;
+  --bg-section-alt: #FFF8E7;
+  --shadow-sm: 0 2px 12px rgba(255,140,0,0.12);
+  --shadow-md: 0 8px 32px rgba(255,140,0,0.18);
+  --shadow-lg: 0 20px 60px rgba(255,140,0,0.25);
+  --radius: 16px;
+  --radius-sm: 8px;
+  --radius-lg: 24px;
+  --navbar-bg: rgba(255,248,231,0.95);
+  --navbar-border: rgba(255,184,0,0.2);
+  --input-bg: #FFF8E7;
+  --footer-bg: #1A0A00;
+  --footer-text: rgba(255,255,255,0.8);
+  --footer-muted: rgba(255,255,255,0.6);
+  --footer-border: rgba(255,184,0,0.15);
+  --modal-bg: #FFFFFF;
+  --product-card-bg: #FFFFFF;
+  --testimonial-bg: #FFF8E7;
+  --filter-btn-bg: #FFFFFF;
+  --section-bg: #FFFFFF;
+  --about-bg: #FFF8E7;
+  --contact-bg: #FFF8E7;
+  --search-bg: #FFFFFF;
+  --sticky-bar-bg: rgba(255,248,231,0.97);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Noto Sans Bengali', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--mango-cream); }
+::-webkit-scrollbar-thumb { background: var(--mango-deep); border-radius: 4px; }
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--navbar-border);
+  padding: 0 5%;
+  height: 70px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 20px rgba(255,140,0,0.08);
+}
+.navbar.scrolled { box-shadow: var(--shadow-sm); }
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--mango-green), var(--mango-deep));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.logo-icon { font-size: 1.8rem; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)} }
+
+.nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--text-secondary);
+  font-size: 0.95rem; font-weight: 500;
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+.nav-links a:hover { background: rgba(255,184,0,0.15); color: var(--mango-deep); }
+
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+
+.lang-toggle {
+  background: linear-gradient(135deg, var(--mango-green), #1a5e00);
+  color: white; border: none;
+  padding: 7px 14px; border-radius: 20px;
+  font-size: 0.82rem; font-family: 'Noto Sans Bengali', sans-serif;
+  cursor: pointer; font-weight: 600;
+  transition: all 0.2s ease;
+}
+.lang-toggle:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(45,139,0,0.3); }
+
+.cart-btn {
+  position: relative;
+  background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep));
+  border: none; padding: 8px 14px; border-radius: 20px;
+  cursor: pointer; font-size: 1.1rem; transition: all 0.2s ease;
+}
+.cart-btn:hover { transform: scale(1.05); box-shadow: 0 4px 14px rgba(255,140,0,0.4); }
+.cart-count {
+  position: absolute; top: -4px; right: -4px;
+  background: var(--mango-orange); color: white;
+  width: 18px; height: 18px; border-radius: 50%;
+  font-size: 0.7rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  animation: pop 0.3s ease;
+}
+@keyframes pop { 0%{transform:scale(0)} 70%{transform:scale(1.2)} 100%{transform:scale(1)} }
+
+.auth-btn {
+  background: transparent; border: 2px solid var(--mango-deep);
+  color: var(--mango-deep); padding: 7px 16px; border-radius: 20px;
+  font-size: 0.88rem; font-family: 'Noto Sans Bengali', sans-serif;
+  cursor: pointer; font-weight: 600; transition: all 0.2s ease;
+}
+.auth-btn:hover { background: var(--mango-deep); color: white; }
+.auth-btn.primary {
+  background: linear-gradient(135deg, var(--mango-deep), var(--mango-orange));
+  color: white; border-color: transparent;
+}
+.auth-btn.primary:hover { box-shadow: 0 4px 14px rgba(255,107,26,0.4); transform: translateY(-1px); }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--mango-deep); border-radius: 2px; transition: all 0.3s ease; }
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+.mobile-menu {
+  display: none; position: fixed; top: 70px; left: 0; right: 0;
+  background: var(--navbar-bg); backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--navbar-border);
+  padding: 20px 5%; z-index: 999;
+  flex-direction: column; gap: 4px; box-shadow: var(--shadow-md);
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { text-decoration: none; color: var(--text-secondary); font-size: 1rem; padding: 12px 16px; border-radius: var(--radius-sm); font-weight: 500; transition: all 0.2s ease; }
+.mobile-menu a:hover { background: rgba(255,184,0,0.15); color: var(--mango-deep); }
+
+/* ===== ANNOUNCEMENT BAR ===== */
+.announcement-bar {
+  background: linear-gradient(90deg, #7B3F00, #B85C00, #7B3F00);
+  background-size: 200% auto;
+  animation: shimmerBg 4s linear infinite;
+  color: #FFE0A0;
+  text-align: center;
+  padding: 10px 5%;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 999;
+  margin-top: 70px;
+}
+@keyframes shimmerBg { 0%{background-position:0% 0} 100%{background-position:200% 0} }
+.ann-code { background: rgba(255,200,80,0.2); border: 1px solid rgba(255,200,80,0.4); padding: 2px 10px; border-radius: 12px; color: #FFCA28; font-weight: 800; letter-spacing: 1px; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FFF8E7 0%, #FFE082 50%, #FF8C00 100%);
+  display: flex; align-items: center;
+  padding: 60px 5% 60px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -50%; right: -20%;
+  width: 80vh; height: 80vh;
+  background: radial-gradient(circle, rgba(255,140,0,0.2) 0%, transparent 70%);
+  border-radius: 50%; animation: pulse 4s ease-in-out infinite;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -30%; left: -10%;
+  width: 60vh; height: 60vh;
+  background: radial-gradient(circle, rgba(45,139,0,0.12) 0%, transparent 70%);
+  border-radius: 50%; animation: pulse 5s ease-in-out infinite reverse;
+}
+@keyframes pulse { 0%,100%{transform:scale(1);opacity:0.6} 50%{transform:scale(1.1);opacity:1} }
+
+.hero-content {
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center; position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(45,139,0,0.12); border: 1px solid rgba(45,139,0,0.25);
+  color: var(--mango-green); padding: 6px 14px; border-radius: 20px;
+  font-size: 0.82rem; font-weight: 600; margin-bottom: 16px;
+}
+.hero-title { font-family: 'Noto Serif Bengali', serif; font-size: clamp(2rem,5vw,3.8rem); font-weight: 800; line-height: 1.2; color: var(--text-primary); margin-bottom: 20px; }
+.hero-title .highlight { background: linear-gradient(135deg, var(--mango-green), var(--mango-deep)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-desc { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 32px; max-width: 480px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--mango-green), #1a5e00);
+  color: white; border: none; padding: 14px 28px; border-radius: 30px;
+  font-size: 1rem; font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600;
+  cursor: pointer; transition: all 0.3s ease; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 6px 20px rgba(45,139,0,0.3);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(45,139,0,0.4); }
+
+.btn-secondary {
+  background: var(--bg-card); color: var(--mango-deep);
+  border: 2px solid var(--mango-deep); padding: 12px 26px; border-radius: 30px;
+  font-size: 1rem; font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600;
+  cursor: pointer; transition: all 0.3s ease; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { background: var(--mango-deep); color: white; transform: translateY(-3px); }
+
+.hero-stats { display: flex; gap: 30px; margin-top: 36px; flex-wrap: wrap; }
+.stat-item { text-align: center; }
+.stat-num { font-family: 'Noto Serif Bengali', serif; font-size: 1.8rem; font-weight: 800; color: var(--mango-deep); display: block; }
+.stat-label { font-size: 0.8rem; color: var(--text-light); font-weight: 500; }
+
+.hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+.hero-mango-blob {
+  width: 380px; height: 380px;
+  background: radial-gradient(ellipse at 40% 35%, #FFE082, #FFB800 50%, #FF8C00 85%);
+  border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 30px 80px rgba(255,140,0,0.35), inset 0 -20px 40px rgba(255,70,0,0.2);
+  animation: morph 6s ease-in-out infinite;
+  position: relative; z-index: 1; overflow: hidden;
+}
+.hero-mango-blob img { width: 85%; height: 85%; object-fit: cover; border-radius: 50%; filter: drop-shadow(0 8px 24px rgba(200,80,0,0.4)); }
+@keyframes morph {
+  0%,100%{border-radius:60% 40% 55% 45% / 45% 55% 45% 55%}
+  25%{border-radius:55% 45% 60% 40% / 55% 45% 55% 45%}
+  50%{border-radius:45% 55% 45% 55% / 60% 40% 60% 40%}
+  75%{border-radius:40% 60% 40% 60% / 45% 55% 45% 55%}
+}
+
+.floating-badges { position: absolute; width: 100%; height: 100%; }
+.f-badge {
+  position: absolute; background: var(--bg-card);
+  border-radius: var(--radius-sm); padding: 8px 12px;
+  box-shadow: var(--shadow-md); font-size: 0.82rem; font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+  animation: floatBadge 3s ease-in-out infinite; white-space: nowrap;
+  color: var(--text-primary);
+  border: 1px solid var(--navbar-border);
+}
+.f-badge:nth-child(1) { top: 10%; right: -10%; animation-delay: 0s; }
+.f-badge:nth-child(2) { bottom: 20%; left: -15%; animation-delay: 1s; }
+.f-badge:nth-child(3) { top: 60%; right: -5%; animation-delay: 1.5s; }
+@keyframes floatBadge { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+/* ===== OFFER BANNER ===== */
+.offer-banner {
+  background: linear-gradient(135deg, var(--mango-green) 0%, #1a5e00 50%, #2D8B00 100%);
+  padding: 20px 5%; text-align: center; position: relative; overflow: hidden;
+}
+.offer-text { color: white; font-size: clamp(0.9rem,2.5vw,1.1rem); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.offer-tag { background: var(--mango-yellow); color: var(--mango-dark); padding: 4px 12px; border-radius: 20px; font-weight: 800; font-size: 0.95rem; animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.7} }
+
+/* ===== SECTIONS ===== */
+section { padding: 80px 5%; }
+.section-header { text-align: center; margin-bottom: 50px; }
+.section-tag { display: inline-block; background: rgba(255,184,0,0.15); color: var(--mango-deep); padding: 5px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; margin-bottom: 12px; border: 1px solid rgba(255,184,0,0.3); }
+.section-title { font-family: 'Noto Serif Bengali', serif; font-size: clamp(1.6rem,4vw,2.4rem); font-weight: 700; color: var(--text-primary); margin-bottom: 14px; }
+.section-title .accent { color: var(--mango-deep); }
+.section-desc { color: var(--text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.8; font-size: 0.97rem; }
+.section-divider { width: 60px; height: 4px; background: linear-gradient(90deg, var(--mango-yellow), var(--mango-deep)); border-radius: 2px; margin: 16px auto 0; }
+
+/* ===== FEATURES STRIP ===== */
+.features-strip {
+  background: linear-gradient(135deg, var(--mango-deep), var(--mango-orange));
+  padding: 28px 5%;
+}
+.features-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.feature-item { display: flex; align-items: center; gap: 14px; }
+.feature-icon { width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+.feature-text-title { font-weight: 700; font-size: 0.97rem; color: white; }
+.feature-text-sub { font-size: 0.78rem; color: rgba(255,255,255,0.75); margin-top: 2px; }
+
+/* ===== SEARCH & FILTER ===== */
+.search-filter {
+  background: var(--search-bg); border-radius: var(--radius-lg);
+  padding: 28px; margin-bottom: 40px; box-shadow: var(--shadow-sm);
+  display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+  border: 1px solid var(--navbar-border);
+}
+.search-box { flex: 1; min-width: 220px; position: relative; }
+.search-box input {
+  width: 100%; padding: 12px 16px 12px 44px;
+  border: 2px solid rgba(255,184,0,0.25); border-radius: 30px;
+  font-size: 0.95rem; font-family: 'Noto Sans Bengali', sans-serif;
+  background: var(--input-bg); color: var(--text-primary); outline: none;
+  transition: all 0.2s ease;
+}
+.search-box input:focus { border-color: var(--mango-yellow); box-shadow: 0 0 0 3px rgba(255,184,0,0.15); }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: var(--text-light); }
+.filter-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-btn {
+  padding: 9px 18px; border: 2px solid rgba(255,184,0,0.3); border-radius: 20px;
+  background: var(--filter-btn-bg); color: var(--text-secondary);
+  font-size: 0.88rem; font-family: 'Noto Sans Bengali', sans-serif; font-weight: 500;
+  cursor: pointer; transition: all 0.2s ease;
+}
+.filter-btn:hover { border-color: var(--mango-yellow); color: var(--mango-deep); background: rgba(255,184,0,0.08); }
+.filter-btn.active { background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep)); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(255,140,0,0.3); }
+
+/* Sort dropdown */
+.sort-wrap { display: flex; align-items: center; gap: 8px; }
+.sort-wrap label { font-size: 0.82rem; color: var(--text-light); white-space: nowrap; }
+.sort-select {
+  padding: 9px 14px; border: 2px solid rgba(255,184,0,0.25); border-radius: 20px;
+  background: var(--filter-btn-bg); color: var(--text-secondary);
+  font-size: 0.85rem; font-family: 'Noto Sans Bengali', sans-serif;
+  cursor: pointer; outline: none; transition: all 0.2s ease;
+}
+.sort-select:focus { border-color: var(--mango-yellow); }
+
+/* ===== PRODUCT GRID ===== */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 24px; }
+.product-card {
+  background: var(--product-card-bg); border-radius: var(--radius-lg);
+  overflow: hidden; box-shadow: var(--shadow-sm);
+  transition: all 0.35s ease; position: relative; cursor: pointer;
+  border: 1px solid var(--navbar-border);
+}
+.product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+
+.product-img-wrap {
+  height: 220px;
+  background: linear-gradient(135deg, #FFF3CC, #FFE082);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.product-card:hover .product-img-wrap img { transform: scale(1.06); }
+.product-img-placeholder { font-size: 5rem; filter: drop-shadow(0 8px 16px rgba(255,100,0,0.25)); }
+
+.product-badge {
+  position: absolute; top: 14px; left: 14px;
+  padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;
+  background: var(--mango-orange); color: white; z-index: 1;
+}
+.product-badge.new { background: var(--mango-green); }
+.product-badge.hot { background: #e74c3c; }
+
+.wishlist-btn {
+  position: absolute; top: 12px; right: 12px; background: var(--bg-card);
+  border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 1rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12); transition: all 0.2s ease; z-index: 1;
+}
+.wishlist-btn:hover { transform: scale(1.15); }
+.wishlist-btn.active { color: #e74c3c; }
+
+/* Quick view overlay */
+.quick-view-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.6); color: white;
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; font-size: 0.82rem; font-weight: 700;
+  padding: 12px; opacity: 0; transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+.product-card:hover .quick-view-overlay { opacity: 1; }
+
+.product-info { padding: 18px; }
+.product-name { font-family: 'Noto Serif Bengali', serif; font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.product-origin { font-size: 0.8rem; color: var(--text-light); margin-bottom: 10px; display: flex; align-items: center; gap: 4px; }
+.product-rating { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+.stars { color: var(--mango-yellow); font-size: 0.88rem; letter-spacing: 1px; }
+.rating-count { font-size: 0.78rem; color: var(--text-light); }
+.product-footer { display: flex; align-items: center; justify-content: space-between; }
+.product-price { font-family: 'Noto Serif Bengali', serif; }
+.price-main { font-size: 1.3rem; font-weight: 800; color: var(--mango-deep); }
+.price-unit { font-size: 0.75rem; color: var(--text-light); margin-left: 2px; }
+.price-old { font-size: 0.82rem; color: var(--text-light); text-decoration: line-through; display: block; }
+.discount-tag { display: inline-block; background: rgba(255,107,26,0.15); color: var(--mango-orange); font-size: 0.7rem; font-weight: 700; padding: 1px 6px; border-radius: 6px; margin-left: 4px; }
+.add-cart-btn {
+  background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep));
+  border: none; color: white; padding: 10px 16px; border-radius: 25px;
+  font-size: 0.88rem; font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600;
+  cursor: pointer; transition: all 0.25s ease; display: flex; align-items: center; gap: 6px;
+}
+.add-cart-btn:hover { transform: scale(1.06); box-shadow: 0 5px 16px rgba(255,140,0,0.4); }
+.add-cart-btn:active { transform: scale(0.98); }
+.no-results { text-align: center; padding: 60px 20px; color: var(--text-light); font-size: 1.1rem; grid-column: 1/-1; }
+
+/* ===== SEASONAL TIMER ===== */
+.seasonal-section { background: linear-gradient(135deg, #FFF8E7, #FFE082); padding: 40px 5%; }
+.seasonal-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+.seasonal-title { font-family: 'Noto Serif Bengali', serif; font-size: clamp(1.3rem,3vw,1.8rem); font-weight: 800; color: var(--text-primary); margin-bottom: 8px; }
+.seasonal-sub { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 24px; }
+.timer-grid { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.timer-box { background: var(--bg-card); border-radius: var(--radius); padding: 16px 20px; min-width: 80px; box-shadow: var(--shadow-sm); border: 1px solid var(--navbar-border); }
+.timer-num { font-family: 'Noto Serif Bengali', serif; font-size: 2rem; font-weight: 800; color: var(--mango-deep); display: block; line-height: 1; }
+.timer-label { font-size: 0.72rem; color: var(--text-light); display: block; margin-top: 4px; font-weight: 600; }
+
+/* ===== ABOUT ===== */
+.about { background: var(--about-bg); }
+.about-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-visual { position: relative; display: flex; justify-content: center; }
+.about-blob {
+  width: 320px; height: 320px;
+  background: linear-gradient(135deg, #FFE082, #FFB800);
+  border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-lg); animation: morph 8s ease-in-out infinite;
+  overflow: hidden;
+}
+.about-blob img { width: 100%; height: 100%; object-fit: cover; }
+.about-cards { position: absolute; display: flex; flex-direction: column; gap: 12px; right: -20px; top: 50%; transform: translateY(-50%); }
+.a-card {
+  background: var(--bg-card); padding: 12px 16px; border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 10px;
+  font-size: 0.88rem; font-weight: 600; min-width: 160px; color: var(--text-primary);
+  border: 1px solid var(--navbar-border);
+}
+.a-card-icon { font-size: 1.4rem; }
+
+.about-feature-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin: 24px 0 30px; }
+.about-feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+.feat-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+/* ===== HOW IT WORKS ===== */
+.how-section { background: var(--section-bg); }
+.how-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; position: relative; }
+.how-grid::before { content: ''; position: absolute; top: 32px; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, var(--mango-yellow), var(--mango-deep)); z-index: 0; }
+.how-step { text-align: center; position: relative; z-index: 1; }
+.how-num { width: 64px; height: 64px; background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 14px; box-shadow: 0 6px 20px rgba(255,140,0,0.35); }
+.how-title { font-family: 'Noto Serif Bengali', serif; font-weight: 700; font-size: 1rem; color: var(--text-primary); margin-bottom: 6px; }
+.how-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ===== TESTIMONIALS ===== */
+.testimonials { background: var(--about-bg); }
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+.testimonial-card {
+  background: var(--testimonial-bg); border-radius: var(--radius-lg); padding: 28px;
+  border: 1px solid var(--navbar-border); transition: all 0.3s ease; position: relative;
+}
+.testimonial-card::before { content: '"'; position: absolute; top: 16px; right: 22px; font-size: 4rem; color: var(--mango-yellow); font-family: 'Playfair Display', serif; line-height: 1; opacity: 0.4; }
+.testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.reviewer { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.reviewer-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep)); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; color: white; font-family: 'Noto Serif Bengali', serif; flex-shrink: 0; }
+.reviewer-name { font-weight: 700; font-size: 0.97rem; color: var(--text-primary); font-family: 'Noto Serif Bengali', serif; }
+.reviewer-location { font-size: 0.78rem; color: var(--text-light); }
+.review-text { font-size: 0.93rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px; }
+
+/* ===== NEWSLETTER ===== */
+.newsletter-section {
+  background: linear-gradient(135deg, #FF8C00, #FF6B1A);
+  padding: 60px 5%; text-align: center;
+}
+.newsletter-title { font-family: 'Noto Serif Bengali', serif; font-size: clamp(1.4rem,3vw,2rem); font-weight: 800; color: white; margin-bottom: 8px; }
+.newsletter-sub { color: rgba(255,255,255,0.85); font-size: 0.95rem; margin-bottom: 24px; }
+.newsletter-form { display: flex; gap: 10px; max-width: 480px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+.newsletter-input {
+  flex: 1; min-width: 220px; padding: 13px 20px; border-radius: 30px; border: none;
+  font-size: 0.95rem; font-family: 'Noto Sans Bengali', sans-serif; outline: none;
+  background: rgba(255,255,255,0.95); color: #1A0A00;
+}
+.newsletter-btn {
+  background: var(--mango-dark); color: #FFCA28;
+  border: none; padding: 13px 24px; border-radius: 30px;
+  font-weight: 700; font-family: 'Noto Sans Bengali', sans-serif; font-size: 0.95rem;
+  cursor: pointer; transition: all 0.2s ease;
+}
+.newsletter-btn:hover { background: #2A1200; transform: scale(1.04); }
+
+/* ===== CONTACT ===== */
+.contact { background: var(--contact-bg); }
+.contact-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+.contact-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 24px; }
+.contact-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+.contact-label { font-weight: 700; font-size: 0.92rem; color: var(--text-primary); margin-bottom: 2px; }
+.contact-value { font-size: 0.9rem; color: var(--text-secondary); }
+.contact-form { background: var(--bg-card); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-sm); border: 1px solid var(--navbar-border); }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+.form-group input, .form-group textarea {
+  width: 100%; padding: 11px 14px;
+  border: 2px solid rgba(255,184,0,0.2); border-radius: var(--radius-sm);
+  font-size: 0.93rem; font-family: 'Noto Sans Bengali', sans-serif;
+  color: var(--text-primary); background: var(--input-bg); outline: none; transition: all 0.2s ease;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--mango-yellow); box-shadow: 0 0 0 3px rgba(255,184,0,0.15); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: linear-gradient(160deg, #1a0a00 0%, #2a1200 40%, #1f0d00 70%, #110600 100%);
+  color: var(--footer-text);
+  padding: 60px 5% 28px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--mango-green), var(--mango-yellow), var(--mango-deep), var(--mango-orange));
+}
+footer::after {
+  content: '';
+  position: absolute; top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,184,0,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+  max-width: 1100px; margin: 0 auto 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255,184,0,0.15);
+  position: relative; z-index: 1;
+}
+.footer-logo {
+  font-family: 'Noto Serif Bengali', serif; font-size: 1.8rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--mango-yellow), var(--mango-orange));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.footer-desc { font-size: 0.92rem; line-height: 1.85; margin-bottom: 22px; color: rgba(255,210,120,0.65); }
+.footer-tagline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,184,0,0.1); border: 1px solid rgba(255,184,0,0.2);
+  padding: 7px 14px; border-radius: 20px;
+  font-size: 0.82rem; color: rgba(255,184,0,0.8); font-weight: 600;
+  margin-bottom: 20px;
+}
+.social-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.social-link {
+  width: 40px; height: 40px;
+  background: rgba(255,184,0,0.12); border: 1px solid rgba(255,184,0,0.2);
+  border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; text-decoration: none; transition: all 0.25s ease;
+}
+.social-link:hover { background: var(--mango-yellow); border-color: var(--mango-yellow); transform: translateY(-3px); box-shadow: 0 6px 16px rgba(255,184,0,0.25); }
+
+.footer-col-title {
+  font-family: 'Noto Serif Bengali', serif; font-size: 1.05rem; font-weight: 700;
+  color: var(--mango-yellow); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-col-title::after { content: ''; flex: 1; height: 1px; background: rgba(255,184,0,0.2); }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a {
+  color: rgba(255,210,120,0.6); text-decoration: none; font-size: 0.9rem;
+  transition: all 0.2s ease; display: flex; align-items: center; gap: 6px;
+}
+.footer-links a::before { content: '›'; color: var(--mango-yellow); opacity: 0.5; font-size: 1rem; transition: all 0.2s ease; }
+.footer-links a:hover { color: var(--mango-yellow); padding-left: 4px; }
+.footer-links a:hover::before { opacity: 1; }
+
+.footer-bottom {
+  text-align: center; font-size: 0.85rem;
+  color: rgba(255,200,100,0.4);
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  flex-wrap: wrap; position: relative; z-index: 1;
+}
+.footer-bottom span { color: rgba(255,200,100,0.55); }
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
+  z-index: 2000; align-items: center; justify-content: center;
+  padding: 16px;
+}
+.modal-overlay.open { display: flex; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.modal {
+  background: var(--modal-bg); border-radius: var(--radius-lg); padding: 36px;
+  width: 100%; max-width: 420px; position: relative;
+  animation: slideUp 0.3s ease; max-height: 90vh; overflow-y: auto;
+  border: 1px solid var(--navbar-border);
+}
+@keyframes slideUp { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  background: rgba(128,64,0,0.1); border: none; width: 32px; height: 32px;
+  border-radius: 50%; font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; color: var(--text-primary);
+}
+.modal-close:hover { background: rgba(128,64,0,0.2); transform: rotate(90deg); }
+.modal-title { font-family: 'Noto Serif Bengali', serif; font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+.modal-sub { font-size: 0.88rem; color: var(--text-light); margin-bottom: 24px; }
+.modal-tabs { display: flex; background: var(--input-bg); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 24px; }
+.modal-tab { flex: 1; background: none; border: none; padding: 9px; border-radius: var(--radius-sm); font-size: 0.93rem; font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600; cursor: pointer; color: var(--text-light); transition: all 0.2s ease; }
+.modal-tab.active { background: var(--bg-card); color: var(--mango-deep); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.auth-form { display: flex; flex-direction: column; gap: 14px; }
+.auth-form input { padding: 12px 16px; border: 2px solid rgba(255,184,0,0.25); border-radius: var(--radius-sm); font-size: 0.93rem; font-family: 'Noto Sans Bengali', sans-serif; color: var(--text-primary); background: var(--input-bg); outline: none; transition: all 0.2s ease; }
+.auth-form input:focus { border-color: var(--mango-yellow); box-shadow: 0 0 0 3px rgba(255,184,0,0.15); }
+.form-msg { font-size: 0.83rem; padding: 10px 14px; border-radius: var(--radius-sm); display: none; }
+.form-msg.error { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; display: block; }
+.form-msg.success { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; display: block; }
+
+/* ===== QUICK VIEW MODAL ===== */
+.qv-modal { max-width: 560px; }
+.qv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+.qv-img { border-radius: var(--radius); overflow: hidden; height: 220px; background: linear-gradient(135deg,#FFF3CC,#FFE082); display:flex;align-items:center;justify-content:center; }
+.qv-img img { width: 100%; height: 100%; object-fit: cover; }
+.qv-name { font-family: 'Noto Serif Bengali', serif; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+.qv-origin { font-size: 0.85rem; color: var(--text-light); margin-bottom: 10px; }
+.qv-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; }
+.qv-price { font-family: 'Noto Serif Bengali', serif; font-size: 1.6rem; font-weight: 800; color: var(--mango-deep); margin-bottom: 16px; }
+.qv-qty { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.qv-qty-btn { width: 32px; height: 32px; background: rgba(255,184,0,0.15); border: none; border-radius: 50%; font-size: 1rem; font-weight: 700; cursor: pointer; color: var(--mango-deep); display:flex;align-items:center;justify-content:center; transition: all 0.2s; }
+.qv-qty-btn:hover { background: var(--mango-yellow); color: white; }
+.qv-qty-num { font-weight: 700; font-size: 1rem; min-width: 28px; text-align: center; color: var(--text-primary); }
+
+/* ===== CART MODAL ===== */
+.cart-modal { max-width: 500px; }
+.cart-items { max-height: 340px; overflow-y: auto; margin-bottom: 20px; }
+.cart-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(255,184,0,0.15); animation: slideUp 0.3s ease; }
+.cart-item-emoji { font-size: 2.2rem; min-width: 44px; text-align: center; }
+.cart-item-name { font-weight: 700; font-size: 0.95rem; color: var(--text-primary); font-family: 'Noto Serif Bengali', serif; }
+.cart-item-price { font-size: 0.88rem; color: var(--mango-deep); font-weight: 600; }
+.qty-control { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.qty-btn { width: 28px; height: 28px; background: rgba(255,184,0,0.15); border: none; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; font-weight: 700; color: var(--mango-deep); }
+.qty-btn:hover { background: var(--mango-yellow); color: white; }
+.qty-num { font-weight: 700; font-size: 0.97rem; min-width: 22px; text-align: center; color: var(--text-primary); }
+.remove-btn { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 1rem; padding: 4px; transition: transform 0.2s ease; }
+.remove-btn:hover { transform: scale(1.2); }
+.cart-summary { background: var(--input-bg); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 16px; }
+.cart-row { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; }
+.cart-total-row { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.05rem; color: var(--text-primary); padding-top: 10px; border-top: 1px solid rgba(255,184,0,0.25); font-family: 'Noto Serif Bengali', serif; }
+.empty-cart { text-align: center; padding: 40px; color: var(--text-light); }
+.empty-cart-icon { font-size: 3.5rem; margin-bottom: 12px; }
+.empty-cart-text { font-size: 1rem; font-family: 'Noto Serif Bengali', serif; }
+
+/* Coupon input */
+.coupon-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.coupon-input { flex: 1; padding: 10px 14px; border: 2px solid rgba(255,184,0,0.25); border-radius: 20px; font-size: 0.88rem; font-family: 'Noto Sans Bengali',sans-serif; color: var(--text-primary); background: var(--input-bg); outline: none; letter-spacing: 1px; text-transform: uppercase; }
+.coupon-input:focus { border-color: var(--mango-yellow); }
+.coupon-btn { background: linear-gradient(135deg,var(--mango-yellow),var(--mango-deep)); border: none; color: white; padding: 10px 16px; border-radius: 20px; font-size: 0.85rem; font-family: 'Noto Sans Bengali',sans-serif; font-weight: 700; cursor: pointer; }
+
+/* ===== CHECKOUT ===== */
+.checkout-steps { display: flex; gap: 0; margin-bottom: 28px; }
+.step { flex: 1; text-align: center; font-size: 0.78rem; color: var(--text-light); font-weight: 500; position: relative; padding-bottom: 10px; }
+.step::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,184,0,0.2); border-radius: 2px; }
+.step.active { color: var(--mango-deep); font-weight: 700; }
+.step.active::after { background: linear-gradient(90deg, var(--mango-yellow), var(--mango-deep)); }
+.step.done { color: var(--mango-green); }
+.step.done::after { background: var(--mango-green); }
+.step-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,184,0,0.15); color: var(--text-light); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; margin: 0 auto 8px; }
+.step.active .step-num { background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep)); color: white; }
+.step.done .step-num { background: var(--mango-green); color: white; }
+.checkout-form { display: flex; flex-direction: column; gap: 12px; }
+.success-animation { text-align: center; padding: 20px; }
+.success-icon { font-size: 4rem; margin-bottom: 14px; animation: bounce 0.6s ease; }
+@keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
+.success-title { font-family: 'Noto Serif Bengali', serif; font-size: 1.4rem; font-weight: 700; color: var(--mango-green); margin-bottom: 8px; }
+.success-desc { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* ===== TOAST ===== */
+.toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+.toast { background: var(--mango-dark); color: #FFE8B5; padding: 12px 20px; border-radius: var(--radius-sm); font-size: 0.9rem; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow-md); animation: slideInRight 0.3s ease; max-width: 300px; pointer-events: all; }
+.toast.success { background: #1a5e00; color: #B8F5A0; }
+.toast.error { background: #dc2626; color: white; }
+@keyframes slideInRight { from{transform:translateX(100%);opacity:0} to{transform:translateX(0);opacity:1} }
+
+/* ===== USER MENU ===== */
+.user-menu-wrap { position: relative; }
+.user-avatar-btn { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep)); border: none; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: white; font-family: 'Noto Serif Bengali', serif; transition: all 0.2s ease; }
+.user-avatar-btn:hover { box-shadow: 0 4px 12px rgba(255,140,0,0.4); transform: scale(1.06); }
+.user-dropdown { display: none; position: absolute; top: calc(100% + 10px); right: 0; background: var(--modal-bg); border-radius: var(--radius); box-shadow: var(--shadow-md); padding: 8px; min-width: 160px; border: 1px solid var(--navbar-border); z-index: 100; }
+.user-dropdown.open { display: block; animation: slideUp 0.2s ease; }
+.user-dropdown-name { padding: 8px 12px 12px; font-size: 0.88rem; font-weight: 700; color: var(--text-primary); border-bottom: 1px solid rgba(255,184,0,0.15); margin-bottom: 6px; }
+.user-dropdown a, .user-dropdown button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 9px 12px; border: none; background: none; font-size: 0.88rem; font-family: 'Noto Sans Bengali', sans-serif; color: var(--text-secondary); cursor: pointer; border-radius: var(--radius-sm); transition: all 0.2s ease; text-decoration: none; text-align: left; }
+.user-dropdown a:hover, .user-dropdown button:hover { background: rgba(255,184,0,0.1); color: var(--mango-deep); }
+
+/* ===== STICKY CART BAR ===== */
+.sticky-cart-bar {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+  background: var(--sticky-bar-bg);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--navbar-border);
+  padding: 12px 5%;
+  justify-content: space-between; align-items: center;
+  box-shadow: 0 -4px 20px rgba(255,140,0,0.12);
+}
+.sticky-cart-bar.visible { display: flex; }
+.sticky-cart-info { font-family: 'Noto Serif Bengali', serif; font-weight: 700; font-size: 1rem; color: var(--text-primary); }
+.sticky-cart-sub { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
+
+/* ===== BACK TO TOP — MANGO SHAPE ===== */
+.back-top {
+  position: fixed; bottom: 80px; right: 24px; z-index: 800;
+  width: 54px; height: 60px;
+  background: none;
+  border: none; cursor: pointer;
+  display: none; align-items: center; justify-content: center;
+  transition: all 0.25s ease;
+  filter: drop-shadow(0 6px 16px rgba(255,140,0,0.45));
+  padding: 0;
+}
+.back-top.visible { display: flex; }
+.back-top:hover { transform: translateY(-5px) scale(1.12); filter: drop-shadow(0 10px 22px rgba(255,140,0,0.65)); }
+.back-top svg { width: 54px; height: 60px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .features-grid { grid-template-columns: repeat(2,1fr); }
+  .how-grid { grid-template-columns: repeat(2,1fr); }
+  .how-grid::before { display: none; }
+}
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero-content { grid-template-columns: 1fr; gap: 40px; }
+  .hero { text-align: center; padding: 50px 5% 50px; }
+  .hero-desc { margin: 0 auto 32px; }
+  .hero-btns { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .hero-visual { order: -1; }
+  .hero-mango-blob { width: 260px; height: 260px; }
+  .f-badge { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-visual { display: none; }
+  .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  .qv-grid { grid-template-columns: 1fr; }
+  .qv-img { height: 180px; }
+}
+
+@media (max-width: 768px) {
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .how-grid { grid-template-columns: 1fr 1fr; }
+  .products-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  section { padding: 60px 4%; }
+  .announcement-bar { font-size: 0.75rem; gap: 6px; }
+}
+
+@media (max-width: 600px) {
+  .nav-actions { gap: 6px; }
+  .auth-btn span { display: none; }
+  section { padding: 50px 4%; }
+  .search-filter { padding: 16px; gap: 12px; }
+  .modal { padding: 22px; }
+  .checkout-steps { gap: 4px; }
+  .step { font-size: 0.68rem; }
+  .features-grid { grid-template-columns: 1fr; gap: 12px; }
+  .how-grid { grid-template-columns: 1fr; }
+  .products-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .product-img-wrap { height: 160px; }
+  .product-name { font-size: 0.95rem; }
+  .add-cart-btn { font-size: 0.78rem; padding: 8px 10px; }
+  .hero-mango-blob { width: 220px; height: 220px; }
+  .timer-grid { gap: 10px; }
+  .timer-box { padding: 12px 14px; min-width: 64px; }
+  .timer-num { font-size: 1.5rem; }
+  .newsletter-form { flex-direction: column; align-items: stretch; }
+  .toast-container { bottom: 70px; right: 12px; left: 12px; }
+  .toast { max-width: 100%; }
+  .sticky-cart-bar { padding: 10px 4%; }
+  .back-top { right: 12px; bottom: 72px; }
+}
+
+@media (max-width: 380px) {
+  .products-grid { grid-template-columns: 1fr; }
+  .filter-btns { gap: 6px; }
+  .filter-btn { padding: 7px 12px; font-size: 0.8rem; }
+}
+
+.products-section { background: var(--section-bg); }
+.max-w { max-width: 1200px; margin: 0 auto; }
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo">
+    <span class="logo-icon">🥭</span>
+    <span data-bn="Mango" data-en="Mango">Mango</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products" data-bn="আমের বাজার" data-en="Products">আমের বাজার</a></li>
+    <li><a href="#how" data-bn="কিভাবে কাজ করে" data-en="How It Works">কিভাবে কাজ করে</a></li>
+    <li><a href="#about" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a></li>
+    <li><a href="#reviews" data-bn="রিভিউ" data-en="Reviews">রিভিউ</a></li>
+    <li><a href="#contact" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+    <button class="cart-btn" onclick="openCart()" title="Cart">
+      🛒 <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <div id="authBtns" style="display:flex;gap:8px;align-items:center;">
+      <button class="auth-btn" onclick="openAuth('login')" data-bn="লগইন" data-en="Login">লগইন</button>
+      <button class="auth-btn primary" onclick="openAuth('signup')" data-bn="সাইনআপ" data-en="Sign Up">সাইনআপ</button>
+    </div>
+    <div id="userMenu" class="user-menu-wrap hidden">
+      <button class="user-avatar-btn" id="userAvatarBtn" onclick="toggleUserDropdown()"></button>
+      <div class="user-dropdown" id="userDropdown">
+        <div class="user-dropdown-name" id="dropdownName"></div>
+        <button onclick="openOrders()">📦 <span data-bn="আমার অর্ডার" data-en="My Orders">আমার অর্ডার</span></button>
+        <button onclick="logout()">🚪 <span data-bn="লগআউট" data-en="Logout">লগআউট</span></button>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  <span>🥭</span>
+  <span data-bn="আম মৌসুম শুরু! এখন অর্ডার করুন" data-en="Mango season is here! Order now">আম মৌসুম শুরু! এখন অর্ডার করুন</span>
+  <span class="ann-code">MANGO15 → ১৫% ছাড়</span>
+  <span>·</span>
+  <span data-bn="৫০০ টাকার উপর ফ্রি ডেলিভারি" data-en="Free delivery over ৳500">৫০০ টাকার উপর ফ্রি ডেলিভারি</span>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products" onclick="closeMenu()" data-bn="আমের বাজার" data-en="Products">আমের বাজার</a>
+  <a href="#how" onclick="closeMenu()" data-bn="কিভাবে কাজ করে" data-en="How It Works">কিভাবে কাজ করে</a>
+  <a href="#about" onclick="closeMenu()" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a>
+  <a href="#reviews" onclick="closeMenu()" data-bn="রিভিউ" data-en="Reviews">রিভিউ</a>
+  <a href="#contact" onclick="closeMenu()" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">🌿 <span data-bn="বাংলাদেশের সেরা আম" data-en="Bangladesh's Finest Mangoes">বাংলাদেশের সেরা আম</span></div>
+      <h1 class="hero-title">
+        <span data-bn="সরাসরি বাগান থেকে" data-en="Fresh From The Orchard">সরাসরি বাগান থেকে</span><br>
+        <span class="highlight" data-bn="আপনার দরজায়" data-en="To Your Doorstep">আপনার দরজায়</span>
+      </h1>
+      <p class="hero-desc" data-bn="রাজশাহী, চাঁপাইনবাবগঞ্জ ও সাতক্ষীরার সেরা আম এখন অনলাইনে। তাজা, সুস্বাদু, এবং একেবারে বাগান থেকে সংগ্রহ করা।" data-en="The finest mangoes from Rajshahi, Chapainawabganj and Satkhira. Fresh, sweet and delivered straight from the orchard to you.">
+        রাজশাহী, চাঁপাইনবাবগঞ্জ ও সাতক্ষীরার সেরা আম এখন অনলাইনে। তাজা, সুস্বাদু, এবং একেবারে বাগান থেকে সংগ্রহ করা।
+      </p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-primary" data-bn="আম কিনুন 🛒" data-en="Shop Mangoes 🛒">আম কিনুন 🛒</a>
+        <a href="#about" class="btn-secondary" data-bn="আরো জানুন" data-en="Learn More">আরো জানুন</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-num">১০+</span><span class="stat-label" data-bn="আমের জাত" data-en="Mango Varieties">আমের জাত</span></div>
+        <div class="stat-item"><span class="stat-num">৫০০০+</span><span class="stat-label" data-bn="সন্তুষ্ট গ্রাহক" data-en="Happy Customers">সন্তুষ্ট গ্রাহক</span></div>
+        <div class="stat-item"><span class="stat-num">৪৮ঘণ্টা</span><span class="stat-label" data-bn="ডেলিভারি" data-en="Delivery">ডেলিভারি</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-mango-blob">
+        <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&h=400&fit=crop&auto=format&q=80" alt="Fresh mangoes" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span style="display:none;font-size:9rem;">🥭</span>
+      </div>
+      <div class="floating-badges">
+        <div class="f-badge">🌟 <span data-bn="১০০% জৈব" data-en="100% Organic">১০০% জৈব</span></div>
+        <div class="f-badge">🚚 <span data-bn="ফ্রি ডেলিভারি" data-en="Free Delivery">ফ্রি ডেলিভারি</span></div>
+        <div class="f-badge">⭐ <span data-bn="৪.৯ রেটিং" data-en="4.9 Rating">৪.৯ রেটিং</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER BANNER -->
+<div class="offer-banner">
+  <div class="offer-text">
+    <span class="offer-tag" data-bn="🔥 বিশেষ অফার" data-en="🔥 Special Offer">🔥 বিশেষ অফার</span>
+    <span data-bn="আম মৌসুমে ১কেজির বেশি অর্ডারে ১৫% ছাড় + বিনামূল্যে ডেলিভারি!" data-en="Get 15% OFF + Free Delivery on orders over 1kg this mango season!">আম মৌসুমে ১কেজির বেশি অর্ডারে ১৫% ছাড় + বিনামূল্যে ডেলিভারি!</span>
+    <span class="offer-tag" data-bn="কোড: MANGO15" data-en="Code: MANGO15">কোড: MANGO15</span>
+  </div>
+</div>
+
+<!-- FEATURES STRIP -->
+<div class="features-strip">
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon">🌿</div>
+      <div><div class="feature-text-title" data-bn="১০০% জৈব আম" data-en="100% Organic">১০০% জৈব আম</div><div class="feature-text-sub" data-bn="কোনো রাসায়নিক নেই" data-en="No chemicals used">কোনো রাসায়নিক নেই</div></div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🚚</div>
+      <div><div class="feature-text-title" data-bn="৪৮ঘণ্টা ডেলিভারি" data-en="48hr Delivery">৪৮ঘণ্টা ডেলিভারি</div><div class="feature-text-sub" data-bn="সারা বাংলাদেশে" data-en="Across Bangladesh">সারা বাংলাদেশে</div></div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔄</div>
+      <div><div class="feature-text-title" data-bn="রিটার্ন গ্যারান্টি" data-en="Return Guarantee">রিটার্ন গ্যারান্টি</div><div class="feature-text-sub" data-bn="সমস্যা হলে ফেরত" data-en="Full refund if needed">সমস্যা হলে ফেরত</div></div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🏡</div>
+      <div><div class="feature-text-title" data-bn="সরাসরি বাগান থেকে" data-en="Direct from Farm">সরাসরি বাগান থেকে</div><div class="feature-text-sub" data-bn="কোনো মধ্যস্থতাকারী নেই" data-en="No middlemen">কোনো মধ্যস্থতাকারী নেই</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS SECTION -->
+<section class="products-section" id="products">
+  <div class="max-w">
+    <div class="section-header">
+      <div class="section-tag" data-bn="🥭 আমাদের সংগ্রহ" data-en="🥭 Our Collection">🥭 আমাদের সংগ্রহ</div>
+      <h2 class="section-title">
+        <span data-bn="বেছে নিন আপনার " data-en="Choose Your ">বেছে নিন আপনার </span>
+        <span class="accent" data-bn="পছন্দের আম" data-en="Favourite Mango">পছন্দের আম</span>
+      </h2>
+      <p class="section-desc" data-bn="বাংলাদেশের বিখ্যাত সব অঞ্চল থেকে সংগ্রহ করা সেরা মানের আম।" data-en="Premium quality mangoes sourced from Bangladesh's most famous regions.">বাংলাদেশের বিখ্যাত সব অঞ্চল থেকে সংগ্রহ করা সেরা মানের আম।</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="search-filter">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="আম খুঁজুন..." oninput="filterProducts()" data-ph-bn="আম খুঁজুন..." data-ph-en="Search mangoes...">
+      </div>
+      <div class="filter-btns">
+        <button class="filter-btn active" onclick="setFilter('all', this)" data-bn="সব" data-en="All">সব</button>
+        <button class="filter-btn" onclick="setFilter('premium', this)" data-bn="প্রিমিয়াম" data-en="Premium">প্রিমিয়াম</button>
+        <button class="filter-btn" onclick="setFilter('rajshahi', this)" data-bn="রাজশাহী" data-en="Rajshahi">রাজশাহী</button>
+        <button class="filter-btn" onclick="setFilter('chapai', this)" data-bn="চাঁপাই" data-en="Chapai">চাঁপাই</button>
+        <button class="filter-btn" onclick="setFilter('satkhira', this)" data-bn="সাতক্ষীরা" data-en="Satkhira">সাতক্ষীরা</button>
+      </div>
+      <div class="sort-wrap">
+        <label data-bn="সাজান:" data-en="Sort:">সাজান:</label>
+        <select class="sort-select" id="sortSelect" onchange="filterProducts()">
+          <option value="default" data-bn="ডিফল্ট" data-en="Default">ডিফল্ট</option>
+          <option value="price-asc" data-bn="কম দাম" data-en="Price: Low to High">কম দাম</option>
+          <option value="price-desc" data-bn="বেশি দাম" data-en="Price: High to Low">বেশি দাম</option>
+          <option value="rating" data-bn="সেরা রেটিং" data-en="Best Rating">সেরা রেটিং</option>
+        </select>
+      </div>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- SEASONAL COUNTDOWN -->
+<div class="seasonal-section">
+  <div class="seasonal-inner">
+    <div class="seasonal-title" data-bn="🥭 আম মৌসুম শেষ হওয়ার আগেই অর্ডার করুন!" data-en="🥭 Order before the mango season ends!">🥭 আম মৌসুম শেষ হওয়ার আগেই অর্ডার করুন!</div>
+    <div class="seasonal-sub" data-bn="সীমিত সময়ের অফার — তাড়াতাড়ি করুন!" data-en="Limited time offer — act fast!">সীমিত সময়ের অফার — তাড়াতাড়ি করুন!</div>
+    <div class="timer-grid">
+      <div class="timer-box"><span class="timer-num" id="tDays">00</span><span class="timer-label" data-bn="দিন" data-en="Days">দিন</span></div>
+      <div class="timer-box"><span class="timer-num" id="tHours">00</span><span class="timer-label" data-bn="ঘণ্টা" data-en="Hours">ঘণ্টা</span></div>
+      <div class="timer-box"><span class="timer-num" id="tMins">00</span><span class="timer-label" data-bn="মিনিট" data-en="Minutes">মিনিট</span></div>
+      <div class="timer-box"><span class="timer-num" id="tSecs">00</span><span class="timer-label" data-bn="সেকেন্ড" data-en="Seconds">সেকেন্ড</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="max-w">
+    <div class="section-header">
+      <div class="section-tag" data-bn="📦 কিভাবে কাজ করে" data-en="📦 How It Works">📦 কিভাবে কাজ করে</div>
+      <h2 class="section-title">
+        <span data-bn="মাত্র " data-en="Just ">মাত্র </span>
+        <span class="accent" data-bn="৪টি ধাপে" data-en="4 Simple Steps">৪টি ধাপে</span>
+      </h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-num">🔍</div>
+        <div class="how-title" data-bn="আম বেছে নিন" data-en="Browse Mangoes">আম বেছে নিন</div>
+        <div class="how-desc" data-bn="আমাদের বিশাল সংগ্রহ থেকে পছন্দের আম বেছে নিন।" data-en="Choose from our wide variety of fresh mangoes.">আমাদের বিশাল সংগ্রহ থেকে পছন্দের আম বেছে নিন।</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">🛒</div>
+        <div class="how-title" data-bn="কার্টে যোগ করুন" data-en="Add to Cart">কার্টে যোগ করুন</div>
+        <div class="how-desc" data-bn="পরিমাণ নির্ধারণ করে কার্টে যোগ করুন।" data-en="Set your quantity and add to cart easily.">পরিমাণ নির্ধারণ করে কার্টে যোগ করুন।</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">💳</div>
+        <div class="how-title" data-bn="পেমেন্ট করুন" data-en="Make Payment">পেমেন্ট করুন</div>
+        <div class="how-desc" data-bn="বিকাশ, নগদ বা ক্যাশ অন ডেলিভারিতে পেমেন্ট করুন।" data-en="Pay via bKash, Nagad or Cash on Delivery.">বিকাশ, নগদ বা ক্যাশ অন ডেলিভারিতে পেমেন্ট করুন।</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">🚪</div>
+        <div class="how-title" data-bn="দরজায় পান" data-en="Get Delivered">দরজায় পান</div>
+        <div class="how-desc" data-bn="৪৮ ঘণ্টার মধ্যে তাজা আম আপনার দরজায় পৌঁছে যাবে।" data-en="Fresh mangoes arrive at your door within 48 hours.">৪৮ ঘণ্টার মধ্যে তাজা আম আপনার দরজায় পৌঁছে যাবে।</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="about" id="about">
+  <div class="max-w">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-blob">
+          <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=400&h=400&fit=crop&auto=format&q=80" alt="Mango orchard" onerror="this.style.display='none';this.parentElement.innerHTML+='<span style=\'font-size:8rem;\'>🥭</span>'">
+        </div>
+        <div class="about-cards">
+          <div class="a-card"><span class="a-card-icon">🌱</span><span data-bn="জৈব চাষ" data-en="Organic Farming">জৈব চাষ</span></div>
+          <div class="a-card"><span class="a-card-icon">❄️</span><span data-bn="ঠান্ডা সংরক্ষণ" data-en="Cold Storage">ঠান্ডা সংরক্ষণ</span></div>
+          <div class="a-card"><span class="a-card-icon">🚀</span><span data-bn="দ্রুত ডেলিভারি" data-en="Fast Delivery">দ্রুত ডেলিভারি</span></div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-tag" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</div>
+        <h2 class="section-title" style="text-align:left;margin-bottom:16px;">
+          <span data-bn="কেন আমরা " data-en="Why Choose ">কেন আমরা </span>
+          <span class="accent" data-bn="সেরা?" data-en="Us?">সেরা?</span>
+        </h2>
+        <p style="font-size:0.97rem;color:var(--text-secondary);line-height:1.85;" data-bn="Mango হলো বাংলাদেশের প্রথম অনলাইন আম মার্কেটপ্লেস যেখানে আপনি সরাসরি বাগান মালিকের কাছ থেকে তাজা আম কিনতে পারবেন।" data-en="Mango is Bangladesh's first online mango marketplace where you can buy fresh mangoes directly from orchard owners.">
+          Mango হলো বাংলাদেশের প্রথম অনলাইন আম মার্কেটপ্লেস যেখানে আপনি সরাসরি বাগান মালিকের কাছ থেকে তাজা আম কিনতে পারবেন।
+        </p>
+        <ul class="about-feature-list">
+          <li>
+            <div class="feat-icon">🌿</div>
+            <div><strong data-bn="সরাসরি কৃষক থেকে" data-en="Direct from Farmers">সরাসরি কৃষক থেকে</strong><br>
+            <span data-bn="কোনো মধ্যস্থতাকারী নেই, তাজা ও সেরা মূল্যে।" data-en="No middlemen — fresher produce at better prices.">কোনো মধ্যস্থতাকারী নেই, তাজা ও সেরা মূল্যে।</span></div>
+          </li>
+          <li>
+            <div class="feat-icon">🧪</div>
+            <div><strong data-bn="মান নিয়ন্ত্রণ পরীক্ষিত" data-en="Quality Tested">মান নিয়ন্ত্রণ পরীক্ষিত</strong><br>
+            <span data-bn="প্রতিটি আম পাঠানোর আগে মান পরীক্ষা করা হয়।" data-en="Every mango is quality-checked before shipping.">প্রতিটি আম পাঠানোর আগে মান পরীক্ষা করা হয়।</span></div>
+          </li>
+          <li>
+            <div class="feat-icon">🔄</div>
+            <div><strong data-bn="সহজ রিটার্ন পলিসি" data-en="Easy Return Policy">সহজ রিটার্ন পলিসি</strong><br>
+            <span data-bn="মান সন্তুষ্টজনক না হলে সম্পূর্ণ অর্থ ফেরত।" data-en="Full refund guaranteed if quality isn't satisfactory.">মান সন্তুষ্টজনক না হলে সম্পূর্ণ অর্থ ফেরত।</span></div>
+          </li>
+        </ul>
+        <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+          <span data-bn="এখনই অর্ডার করুন →" data-en="Order Now →">এখনই অর্ডার করুন →</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="reviews">
+  <div class="max-w">
+    <div class="section-header">
+      <div class="section-tag" data-bn="💬 গ্রাহকের কথা" data-en="💬 Customer Reviews">💬 গ্রাহকের কথা</div>
+      <h2 class="section-title">
+        <span data-bn="তারা কী " data-en="What Our ">তারা কী </span>
+        <span class="accent" data-bn="বলছেন?" data-en="Customers Say?">বলছেন?</span>
+      </h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="testimonials-grid" id="testimonialsGrid"></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-section">
+  <div class="newsletter-title" data-bn="🥭 আমাদের নিউজলেটারে যোগ দিন" data-en="🥭 Join Our Newsletter">🥭 আমাদের নিউজলেটারে যোগ দিন</div>
+  <div class="newsletter-sub" data-bn="নতুন আম, অফার ও মৌসুমী আপডেট পান" data-en="Get new arrivals, offers & seasonal updates">নতুন আম, অফার ও মৌসুমী আপডেট পান</div>
+  <div class="newsletter-form">
+    <input class="newsletter-input" type="email" id="nlEmail" data-ph-bn="আপনার ইমেইল লিখুন..." data-ph-en="Enter your email..." placeholder="আপনার ইমেইল লিখুন...">
+    <button class="newsletter-btn" onclick="subscribeNewsletter()" data-bn="সাবস্ক্রাইব করুন" data-en="Subscribe">সাবস্ক্রাইব করুন</button>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="max-w">
+    <div class="section-header">
+      <div class="section-tag" data-bn="📞 যোগাযোগ" data-en="📞 Contact">📞 যোগাযোগ</div>
+      <h2 class="section-title" data-bn="আমাদের সাথে কথা বলুন" data-en="Get In Touch">আমাদের সাথে কথা বলুন</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><div class="contact-label" data-bn="ঠিকানা" data-en="Address">ঠিকানা</div><div class="contact-value" data-bn="মতিঝিল, ঢাকা ১০০০, বাংলাদেশ" data-en="Motijheel, Dhaka 1000, Bangladesh">মতিঝিল, ঢাকা ১০০০, বাংলাদেশ</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div><div class="contact-label" data-bn="ফোন" data-en="Phone">ফোন</div><div class="contact-value">+880 1700-000000</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div><div class="contact-label" data-bn="ইমেইল" data-en="Email">ইমেইল</div><div class="contact-value">hello@mango.com.bd</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⏰</div>
+          <div><div class="contact-label" data-bn="সময়" data-en="Hours">সময়</div><div class="contact-value" data-bn="সোম-শনি: সকাল ৯টা - রাত ৯টা" data-en="Mon-Sat: 9AM - 9PM">সোম-শনি: সকাল ৯টা - রাত ৯টা</div></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group"><label data-bn="আপনার নাম" data-en="Your Name">আপনার নাম</label><input type="text" id="contactName" data-ph-bn="নাম লিখুন" data-ph-en="Enter your name" placeholder="নাম লিখুন"></div>
+        <div class="form-group"><label data-bn="ফোন নম্বর" data-en="Phone Number">ফোন নম্বর</label><input type="tel" id="contactPhone" placeholder="+880 1XXXXXXXXX"></div>
+        <div class="form-group"><label data-bn="বার্তা" data-en="Message">বার্তা</label><textarea id="contactMsg" data-ph-bn="আপনার বার্তা লিখুন..." data-ph-en="Write your message..." placeholder="আপনার বার্তা লিখুন..."></textarea></div>
+        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="sendContact()">
+          <span data-bn="বার্তা পাঠান ✉️" data-en="Send Message ✉️">বার্তা পাঠান ✉️</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">🥭 Mango</div>
+      <div class="footer-tagline">🌿 <span data-bn="বাগান থেকে দরজা পর্যন্ত" data-en="From Orchard to Doorstep">বাগান থেকে দরজা পর্যন্ত</span></div>
+      <p class="footer-desc" data-bn="বাংলাদেশের সেরা অনলাইন আম বিক্রয় প্ল্যাটফর্ম। রাজশাহী, চাঁপাইনবাবগঞ্জ ও সাতক্ষীরার তাজা আম সরাসরি আপনার দরজায়।" data-en="Bangladesh's premier online mango marketplace. Fresh mangoes delivered straight to your door.">
+        বাংলাদেশের সেরা অনলাইন আম বিক্রয় প্ল্যাটফর্ম। রাজশাহী, চাঁপাইনবাবগঞ্জ ও সাতক্ষীরার তাজা আম সরাসরি আপনার দরজায়।
+      </p>
+      <div class="social-links">
+        <a class="social-link" href="#" title="Facebook">📘</a>
+        <a class="social-link" href="#" title="Instagram">📸</a>
+        <a class="social-link" href="#" title="WhatsApp">💬</a>
+        <a class="social-link" href="#" title="YouTube">▶️</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-bn="দ্রুত লিঙ্ক" data-en="Quick Links">দ্রুত লিঙ্ক</div>
+      <ul class="footer-links">
+        <li><a href="#home" data-bn="হোম" data-en="Home">হোম</a></li>
+        <li><a href="#products" data-bn="পণ্য" data-en="Products">পণ্য</a></li>
+        <li><a href="#how" data-bn="কিভাবে কাজ করে" data-en="How It Works">কিভাবে কাজ করে</a></li>
+        <li><a href="#about" data-bn="সম্পর্কে" data-en="About">সম্পর্কে</a></li>
+        <li><a href="#reviews" data-bn="রিভিউ" data-en="Reviews">রিভিউ</a></li>
+        <li><a href="#contact" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title" data-bn="সহায়তা" data-en="Support">সহায়তা</div>
+      <ul class="footer-links">
+        <li><a href="#" data-bn="ডেলিভারি তথ্য" data-en="Delivery Info">ডেলিভারি তথ্য</a></li>
+        <li><a href="#" data-bn="রিটার্ন পলিসি" data-en="Return Policy">রিটার্ন পলিসি</a></li>
+        <li><a href="#" data-bn="প্রাইভেসি পলিসি" data-en="Privacy Policy">প্রাইভেসি পলিসি</a></li>
+        <li><a href="#" data-bn="FAQ" data-en="FAQ">FAQ</a></li>
+        <li><a href="#contact" data-bn="যোগাযোগ করুন" data-en="Contact Us">যোগাযোগ করুন</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Mango.</span>
+    <span data-bn="সর্বস্বত্ব সংরক্ষিত।" data-en="All rights reserved.">সর্বস্বত্ব সংরক্ষিত।</span>
+    <span>Developed by Hridoy 🥭</span>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal" onclick="handleOverlayClick(event,'authModal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('authModal')">✕</button>
+    <div class="modal-title" data-bn="স্বাগতম!" data-en="Welcome!">স্বাগতম!</div>
+    <div class="modal-sub" data-bn="আপনার অ্যাকাউন্টে প্রবেশ করুন" data-en="Access your account">আপনার অ্যাকাউন্টে প্রবেশ করুন</div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="loginTab" onclick="switchAuthTab('login')" data-bn="লগইন" data-en="Login">লগইন</button>
+      <button class="modal-tab" id="signupTab" onclick="switchAuthTab('signup')" data-bn="নতুন অ্যাকাউন্ট" data-en="Sign Up">নতুন অ্যাকাউন্ট</button>
+    </div>
+    <div id="loginForm">
+      <div class="auth-form">
+        <div class="form-msg" id="loginMsg"></div>
+        <input type="email" id="loginEmail" data-ph-bn="ইমেইল ঠিকানা" data-ph-en="Email address" placeholder="ইমেইল ঠিকানা">
+        <input type="password" id="loginPass" data-ph-bn="পাসওয়ার্ড" data-ph-en="Password" placeholder="পাসওয়ার্ড">
+        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="doLogin()"><span data-bn="লগইন করুন" data-en="Login">লগইন করুন</span></button>
+        <p style="text-align:center;font-size:0.83rem;color:var(--text-light);">
+          <span data-bn="অ্যাকাউন্ট নেই?" data-en="No account?">অ্যাকাউন্ট নেই?</span>
+          <button onclick="switchAuthTab('signup')" style="background:none;border:none;color:var(--mango-deep);cursor:pointer;font-weight:700;font-size:0.83rem;" data-bn="সাইনআপ করুন" data-en="Sign up">সাইনআপ করুন</button>
+        </p>
+      </div>
+    </div>
+    <div id="signupForm" class="hidden">
+      <div class="auth-form">
+        <div class="form-msg" id="signupMsg"></div>
+        <input type="text" id="signupName" data-ph-bn="পুরো নাম" data-ph-en="Full name" placeholder="পুরো নাম">
+        <input type="tel" id="signupPhone" placeholder="01XXXXXXXXX">
+        <input type="email" id="signupEmail" data-ph-bn="ইমেইল ঠিকানা" data-ph-en="Email address" placeholder="ইমেইল ঠিকানা">
+        <input type="password" id="signupPass" data-ph-bn="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)" data-ph-en="Password (min 6 chars)" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)">
+        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="doSignup()"><span data-bn="অ্যাকাউন্ট তৈরি করুন" data-en="Create Account">অ্যাকাউন্ট তৈরি করুন</span></button>
+        <p style="text-align:center;font-size:0.83rem;color:var(--text-light);">
+          <span data-bn="ইতিমধ্যে অ্যাকাউন্ট আছে?" data-en="Already have an account?">ইতিমধ্যে অ্যাকাউন্ট আছে?</span>
+          <button onclick="switchAuthTab('login')" style="background:none;border:none;color:var(--mango-deep);cursor:pointer;font-weight:700;font-size:0.83rem;" data-bn="লগইন করুন" data-en="Login">লগইন করুন</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK VIEW MODAL -->
+<div class="modal-overlay" id="quickViewModal" onclick="handleOverlayClick(event,'quickViewModal')">
+  <div class="modal qv-modal">
+    <button class="modal-close" onclick="closeModal('quickViewModal')">✕</button>
+    <div id="quickViewContent"></div>
+  </div>
+</div>
+
+<!-- CART MODAL -->
+<div class="modal-overlay" id="cartModal" onclick="handleOverlayClick(event,'cartModal')">
+  <div class="modal cart-modal">
+    <button class="modal-close" onclick="closeModal('cartModal')">✕</button>
+    <div class="modal-title" data-bn="🛒 আপনার কার্ট" data-en="🛒 Your Cart">🛒 আপনার কার্ট</div>
+    <div id="cartContent"></div>
+    <div id="cartActions"></div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal" onclick="handleOverlayClick(event,'checkoutModal')">
+  <div class="modal" style="max-width:480px;">
+    <button class="modal-close" onclick="closeModal('checkoutModal')">✕</button>
+    <div id="checkoutContent"></div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- STICKY CART BAR -->
+<div class="sticky-cart-bar" id="stickyCartBar">
+  <div>
+    <div class="sticky-cart-info" id="stickyCartInfo"></div>
+    <div class="sticky-cart-sub" data-bn="কার্টে আছে" data-en="items in cart">কার্টে আছে</div>
+  </div>
+  <button class="btn-primary" onclick="openCart()" style="padding:10px 22px;">
+    <span data-bn="কার্ট দেখুন 🛒" data-en="View Cart 🛒">কার্ট দেখুন 🛒</span>
+  </button>
+</div>
+
+<!-- BACK TO TOP — MANGO SHAPED BUTTON -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="উপরে যান">
+  <svg viewBox="0 0 100 115" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="mg" cx="38%" cy="32%" r="68%">
+        <stop offset="0%" stop-color="#FFE082"/>
+        <stop offset="48%" stop-color="#FFB800"/>
+        <stop offset="100%" stop-color="#FF6B1A"/>
+      </radialGradient>
+      <radialGradient id="ms" cx="30%" cy="22%" r="42%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.42)"/>
+        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+      </radialGradient>
+    </defs>
+    <!-- Mango body -->
+    <path d="M50 105 C18 96 6 72 8 50 C10 26 26 10 50 8 C74 10 90 26 92 50 C94 72 82 96 50 105 Z" fill="url(#mg)"/>
+    <!-- Shine highlight -->
+    <ellipse cx="37" cy="34" rx="17" ry="20" fill="url(#ms)"/>
+    <!-- Stem -->
+    <path d="M50 8 C51 2 56 -1 61 1 C64 3 63 7 59 8 C56 9 53 9 50 8 Z" fill="#2D8B00"/>
+    <!-- Leaf -->
+    <path d="M54 7 C60 1 74 -1 77 6 C70 11 61 10 54 7 Z" fill="#3cb800"/>
+    <!-- Up arrow -->
+    <path d="M50 76 L50 40 M50 40 L39 53 M50 40 L61 53" stroke="rgba(255,255,255,0.92)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </svg>
+</button>
+
+<script>
+// ===== DATA =====
+const mangoProducts = [
+  { id:1, emoji:'🥭', img:'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'ফজলি আম', nameEn:'Fazli Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:180, oldPrice:220, unit:'কেজি', unitEn:'kg', rating:4.9, reviews:312, badge:'hot', category:'rajshahi', descBn:'বড় আকারের সুমিষ্টি আম। রাজশাহীর বিখ্যাত জাত।', descEn:'Large and very sweet mango, famous variety from Rajshahi.' },
+  { id:2, emoji:'🟡', img:'https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'ল্যাংড়া আম', nameEn:'Langra Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:220, oldPrice:280, unit:'কেজি', unitEn:'kg', rating:4.8, reviews:256, badge:'premium', category:'chapai', descBn:'রসালো ও সুগন্ধি আম। চাঁপাইনবাবগঞ্জের গর্ব।', descEn:'Juicy and aromatic mango. The pride of Chapainawabganj.' },
+  { id:3, emoji:'🟠', img:'https://images.unsplash.com/photo-1605027990121-cbae9e0642df?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'হিমসাগর আম', nameEn:'Himsagar Mango', originBn:'সাতক্ষীরা', originEn:'Satkhira', price:250, oldPrice:300, unit:'কেজি', unitEn:'kg', rating:4.9, reviews:198, badge:'premium', category:'satkhira', descBn:'অত্যন্ত মিষ্টি ও সুগন্ধি। সাতক্ষীরার সেরা আম।', descEn:'Extremely sweet and fragrant. Best mango from Satkhira.' },
+  { id:4, emoji:'🥭', img:'https://images.unsplash.com/photo-1519096845289-95806ee03a1a?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'গোপালভোগ আম', nameEn:'Gopalbhog Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:200, oldPrice:240, unit:'কেজি', unitEn:'kg', rating:4.7, reviews:145, badge:'new', category:'rajshahi', descBn:'আগাম জাতের আম। সুন্দর হলুদ রঙের ও মিষ্টি।', descEn:'Early season mango with beautiful yellow color and sweet taste.' },
+  { id:5, emoji:'🟡', img:'https://images.unsplash.com/photo-1641420498571-3e8424de5f7c?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'আম্রপালি আম', nameEn:'Amrapali Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:160, oldPrice:200, unit:'কেজি', unitEn:'kg', rating:4.6, reviews:189, badge:null, category:'chapai', descBn:'মাঝারি আকারের মিষ্টি আম। সারা দেশে জনপ্রিয়।', descEn:'Medium-sized sweet mango. Popular all over the country.' },
+  { id:6, emoji:'🟠', img:'https://images.unsplash.com/photo-1590502160462-58b41354f588?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'মিশ্রি ভোগ আম', nameEn:'Mishri Bhog Mango', originBn:'সাতক্ষীরা', originEn:'Satkhira', price:280, oldPrice:340, unit:'কেজি', unitEn:'kg', rating:4.8, reviews:112, badge:'premium', category:'satkhira', descBn:'মিষ্টির রাজা। মুখে দিলেই মিষ্টি গলে যায়।', descEn:'King of sweetness. Melts in your mouth.' },
+  { id:7, emoji:'🥭', img:'https://images.unsplash.com/photo-1618897996318-5a901fa18a5f?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'খিরসাপাতি আম', nameEn:'Khirsapat Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:300, oldPrice:360, unit:'কেজি', unitEn:'kg', rating:5.0, reviews:78, badge:'premium', category:'chapai', descBn:'সর্বোচ্চ মানের প্রিমিয়াম আম। অতুলনীয় স্বাদ।', descEn:'Highest quality premium mango with unmatched taste.' },
+  { id:8, emoji:'🟡', img:'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'লখনা আম', nameEn:'Lakhna Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:140, oldPrice:170, unit:'কেজি', unitEn:'kg', rating:4.5, reviews:234, badge:'new', category:'rajshahi', descBn:'সাশ্রয়ী দামে সুস্বাদু আম। পরিবারের জন্য আদর্শ।', descEn:'Delicious mango at an affordable price. Ideal for the family.' },
+];
+
+const testimonials = [
+  { nameBn:'রাহেলা বেগম', nameEn:'Rahela Begum', locBn:'ঢাকা, মিরপুর', locEn:'Dhaka, Mirpur', avatar:'র', stars:5, textBn:'অসাধারণ মিষ্টি ফজলি আম পেলাম। ২৪ ঘণ্টার মধ্যে ডেলিভারি পেয়েছি।', textEn:'Got amazingly sweet Fazli mangoes. Delivery within 24 hours.' },
+  { nameBn:'মোঃ কামরুল হাসান', nameEn:'Md. Kamrul Hasan', locBn:'চট্টগ্রাম', locEn:'Chittagong', avatar:'ক', stars:5, textBn:'হিমসাগর আম খেয়ে মনে হলো সরাসরি বাগানে আছি। তাজা, রসালো এবং অবিশ্বাস্য মিষ্টি।', textEn:'Eating Himsagar mango felt like being in the orchard. Fresh, juicy and incredibly sweet.' },
+  { nameBn:'সুমাইয়া আক্তার', nameEn:'Sumaiya Akter', locBn:'সিলেট', locEn:'Sylhet', avatar:'স', stars:5, textBn:'ল্যাংড়া আমের স্বাদ একেবারে অনন্য। প্যাকেজিং খুবই ভালো।', textEn:'The taste of Langra mango is absolutely unique. Packaging was excellent.' },
+  { nameBn:'আরিফুল ইসলাম', nameEn:'Ariful Islam', locBn:'রাজশাহী', locEn:'Rajshahi', avatar:'আ', stars:5, textBn:'খিরসাপাতি আম সত্যিই প্রিমিয়াম। ওজনে ঠিকঠাক, মানে অসাধারণ।', textEn:"Khirsapat mango is truly premium. Accurate weight, exceptional quality." },
+  { nameBn:'নাসরিন খানম', nameEn:'Nasrin Khanam', locBn:'ময়মনসিংহ', locEn:'Mymensingh', avatar:'ন', stars:4, textBn:'গোপালভোগ আমের মিষ্টি গন্ধ ও স্বাদ অতুলনীয়।', textEn:"The sweet aroma and taste of Gopalbhog mango is unparalleled." },
+  { nameBn:'তানভীর আহমেদ', nameEn:'Tanvir Ahmed', locBn:'খুলনা', locEn:'Khulna', avatar:'ত', stars:5, textBn:'মিশ্রি ভোগ আম খেয়ে মুখে জল আসে। সাতক্ষীরার এই আম সত্যিই অনন্য।', textEn:"Mishri Bhog mango makes your mouth water. This mango from Satkhira is truly unique." },
+];
+
+// ===== STATE =====
+let cart = JSON.parse(localStorage.getItem('mangoCart') || '[]');
+let users = JSON.parse(localStorage.getItem('mangoUsers') || '[]');
+let currentUser = JSON.parse(localStorage.getItem('mangoUser') || 'null');
+let currentLang = 'bn';
+let currentFilter = 'all';
+let wishlist = new Set(JSON.parse(localStorage.getItem('mangoWishlist') || '[]'));
+let checkoutStep = 1;
+let qvQty = 1;
+let appliedCoupon = false;
+
+// ===== LANG =====
+function toggleLang() {
+  currentLang = currentLang === 'bn' ? 'en' : 'bn';
+  document.documentElement.lang = currentLang;
+  document.getElementById('langToggle').textContent = currentLang === 'bn' ? 'EN' : 'বাং';
+  applyLang();
+}
+function applyLang() {
+  const isBangla = currentLang === 'bn';
+  document.querySelectorAll('[data-bn]').forEach(el => {
+    el.textContent = isBangla ? el.dataset.bn : el.dataset.en;
+  });
+  document.querySelectorAll('[data-ph-bn]').forEach(el => {
+    el.placeholder = isBangla ? el.dataset.phBn : el.dataset.phEn;
+  });
+  renderProducts();
+  renderTestimonials();
+  renderCart();
+}
+
+// ===== NAVBAR =====
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  document.getElementById('navbar').classList.toggle('scrolled', scrollY > 30);
+  document.getElementById('backTop').classList.toggle('visible', scrollY > 400);
+  const cartBar = document.getElementById('stickyCartBar');
+  if (cart.length > 0 && scrollY > 500) {
+    cartBar.classList.add('visible');
+  } else {
+    cartBar.classList.remove('visible');
+  }
+});
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('active');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('active');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// ===== TIMER =====
+function updateTimer() {
+  const end = new Date('2026-09-30T23:59:59');
+  const now = new Date();
+  let diff = Math.max(0, end - now);
+  const days = Math.floor(diff / 86400000); diff %= 86400000;
+  const hours = Math.floor(diff / 3600000); diff %= 3600000;
+  const mins = Math.floor(diff / 60000); diff %= 60000;
+  const secs = Math.floor(diff / 1000);
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('tDays').textContent = pad(days);
+  document.getElementById('tHours').textContent = pad(hours);
+  document.getElementById('tMins').textContent = pad(mins);
+  document.getElementById('tSecs').textContent = pad(secs);
+}
+setInterval(updateTimer, 1000);
+updateTimer();
+
+// ===== AUTH =====
+function openAuth(tab) { document.getElementById('authModal').classList.add('open'); switchAuthTab(tab); }
+function switchAuthTab(tab) {
+  document.getElementById('loginTab').classList.toggle('active', tab === 'login');
+  document.getElementById('signupTab').classList.toggle('active', tab === 'signup');
+  document.getElementById('loginForm').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('signupForm').classList.toggle('hidden', tab !== 'signup');
+  document.getElementById('loginMsg').className = 'form-msg';
+  document.getElementById('signupMsg').className = 'form-msg';
+}
+function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const msg = document.getElementById('loginMsg');
+  if (!email || !pass) { showMsg(msg, currentLang==='bn'?'সব তথ্য পূরণ করুন।':'Please fill all fields.','error'); return; }
+  const user = users.find(u => u.email === email && u.password === pass);
+  if (!user) { showMsg(msg, currentLang==='bn'?'ইমেইল বা পাসওয়ার্ড ভুল।':'Incorrect email or password.','error'); return; }
+  currentUser = user; localStorage.setItem('mangoUser', JSON.stringify(user));
+  updateAuthUI(); closeModal('authModal');
+  showToast('🎉 '+(currentLang==='bn'?'স্বাগতম, '+user.name:'Welcome, '+user.name),'success');
+}
+function doSignup() {
+  const name = document.getElementById('signupName').value.trim();
+  const phone = document.getElementById('signupPhone').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const pass = document.getElementById('signupPass').value;
+  const msg = document.getElementById('signupMsg');
+  if (!name||!email||!pass||!phone) { showMsg(msg,currentLang==='bn'?'সব তথ্য পূরণ করুন।':'Please fill all fields.','error'); return; }
+  if (pass.length<6) { showMsg(msg,currentLang==='bn'?'পাসওয়ার্ড কমপক্ষে ৬ অক্ষর।':'Password min 6 chars.','error'); return; }
+  if (users.find(u=>u.email===email)) { showMsg(msg,currentLang==='bn'?'এই ইমেইলে অ্যাকাউন্ট আছে।':'Account already exists.','error'); return; }
+  const user = { name, phone, email, password: pass, orders:[] };
+  users.push(user); localStorage.setItem('mangoUsers', JSON.stringify(users));
+  currentUser = user; localStorage.setItem('mangoUser', JSON.stringify(user));
+  updateAuthUI(); closeModal('authModal');
+  showToast('✅ '+(currentLang==='bn'?'অ্যাকাউন্ট তৈরি! স্বাগতম!':'Account created! Welcome!'),'success');
+}
+function logout() {
+  currentUser = null; localStorage.removeItem('mangoUser'); updateAuthUI();
+  document.getElementById('userDropdown').classList.remove('open');
+  showToast(currentLang==='bn'?'লগআউট সফল।':'Logged out.');
+}
+function updateAuthUI() {
+  const authBtns = document.getElementById('authBtns');
+  const userMenu = document.getElementById('userMenu');
+  if (currentUser) {
+    authBtns.classList.add('hidden'); userMenu.classList.remove('hidden');
+    document.getElementById('userAvatarBtn').textContent = currentUser.name.charAt(0).toUpperCase();
+    document.getElementById('dropdownName').textContent = currentUser.name;
+  } else { authBtns.classList.remove('hidden'); userMenu.classList.add('hidden'); }
+}
+function toggleUserDropdown() { document.getElementById('userDropdown').classList.toggle('open'); }
+document.addEventListener('click', e => {
+  const wrap = document.getElementById('userMenu');
+  if (wrap && !wrap.contains(e.target)) document.getElementById('userDropdown').classList.remove('open');
+});
+function showMsg(el, text, type) { el.textContent = text; el.className = 'form-msg ' + type; }
+
+// ===== PRODUCTS =====
+function toBanglaNum(n) { return String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]); }
+function discount(p) { return Math.round((p.oldPrice - p.price) / p.oldPrice * 100); }
+
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const sort = document.getElementById('sortSelect').value;
+  const isBangla = currentLang === 'bn';
+  let filtered = mangoProducts.filter(p => {
+    const matchFilter = currentFilter==='all'||(currentFilter==='premium'&&p.badge==='premium')||p.category===currentFilter;
+    const name = isBangla?p.nameBn:p.nameEn;
+    const origin = isBangla?p.originBn:p.originEn;
+    const matchSearch = !search||name.toLowerCase().includes(search)||origin.toLowerCase().includes(search);
+    return matchFilter && matchSearch;
+  });
+  if (sort==='price-asc') filtered.sort((a,b)=>a.price-b.price);
+  else if (sort==='price-desc') filtered.sort((a,b)=>b.price-a.price);
+  else if (sort==='rating') filtered.sort((a,b)=>b.rating-a.rating);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="no-results">🥭 ${isBangla?'কোনো আম পাওয়া যায়নি।':'No mangoes found.'}</div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(p => {
+    const inWishlist = wishlist.has(p.id);
+    const stars = '★'.repeat(Math.floor(p.rating))+(p.rating%1?'☆':'');
+    const inCart = !!cart.find(c=>c.id===p.id);
+    const disc = discount(p);
+    return `<div class="product-card" data-id="${p.id}">
+      <div class="product-img-wrap">
+        <img src="${p.img}" alt="${isBangla?p.nameBn:p.nameEn}" loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="product-img-placeholder" style="display:none;">${p.emoji}</span>
+        ${p.badge?`<span class="product-badge ${p.badge==='premium'?'':p.badge}">${p.badge==='premium'?(isBangla?'প্রিমিয়াম':'Premium'):p.badge==='new'?(isBangla?'নতুন':'New'):(isBangla?'হট':'Hot')}</span>`:''}
+        <button class="wishlist-btn ${inWishlist?'active':''}" onclick="toggleWishlist(${p.id},event)">${inWishlist?'❤️':'🤍'}</button>
+        <div class="quick-view-overlay" onclick="openQuickView(${p.id})">👁 ${isBangla?'দ্রুত দেখুন':'Quick View'}</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">${isBangla?p.nameBn:p.nameEn}</div>
+        <div class="product-origin">📍 ${isBangla?p.originBn:p.originEn}</div>
+        <div class="product-rating">
+          <span class="stars">${stars}</span>
+          <span style="font-weight:700;font-size:0.85rem;color:var(--mango-deep);">${p.rating}</span>
+          <span class="rating-count">(${isBangla?toBanglaNum(p.reviews):p.reviews} ${isBangla?'রিভিউ':'reviews'})</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">
+            <span class="price-old">৳${isBangla?toBanglaNum(p.oldPrice):p.oldPrice} <span class="discount-tag">-${disc}%</span></span>
+            <span class="price-main">৳${isBangla?toBanglaNum(p.price):p.price}</span>
+            <span class="price-unit">/${isBangla?p.unit:p.unitEn}</span>
+          </div>
+          <button class="add-cart-btn" onclick="addToCart(${p.id})" style="${inCart?'background:linear-gradient(135deg,var(--mango-green),#1a5e00)':''}">
+            ${inCart?'✓':'+'}${isBangla?(inCart?'যোগ হয়েছে':'কার্টে'):(inCart?'Added':'Add')}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts();
+}
+function filterProducts() { renderProducts(); }
+function toggleWishlist(id, e) {
+  e.stopPropagation();
+  if (wishlist.has(id)) wishlist.delete(id); else wishlist.add(id);
+  localStorage.setItem('mangoWishlist', JSON.stringify([...wishlist]));
+  renderProducts();
+  const p = mangoProducts.find(x=>x.id===id);
+  if (p) showToast((wishlist.has(id)?'❤️ ':'🤍 ')+(currentLang==='bn'?(wishlist.has(id)?'উইশলিস্টে যোগ হয়েছে':'উইশলিস্ট থেকে সরানো হয়েছে'):(wishlist.has(id)?'Added to wishlist':'Removed from wishlist')));
+}
+
+// ===== QUICK VIEW =====
+function openQuickView(id) {
+  const p = mangoProducts.find(x=>x.id===id);
+  if (!p) return;
+  const isBangla = currentLang === 'bn';
+  qvQty = 1;
+  const disc = discount(p);
+  document.getElementById('quickViewContent').innerHTML = `
+    <div class="modal-title">${isBangla?p.nameBn:p.nameEn}</div>
+    <div class="qv-grid">
+      <div class="qv-img">
+        <img src="${p.img}" alt="${isBangla?p.nameBn:p.nameEn}" onerror="this.style.display='none';this.parentElement.innerHTML+='<span style=\'font-size:5rem;\'>${p.emoji}</span>'">
+      </div>
+      <div>
+        <div class="qv-origin">📍 ${isBangla?p.originBn:p.originEn}</div>
+        <div class="product-rating" style="margin-bottom:10px;">
+          <span class="stars">${'★'.repeat(Math.floor(p.rating))}</span>
+          <span style="font-weight:700;font-size:0.85rem;color:var(--mango-deep);">${p.rating}</span>
+        </div>
+        <div class="qv-desc">${isBangla?p.descBn:p.descEn}</div>
+        <div class="qv-price">৳${p.price}<span style="font-size:0.9rem;color:var(--text-light);font-weight:400;"> /${isBangla?p.unit:p.unitEn}</span>
+          <span style="font-size:0.82rem;color:var(--mango-orange);margin-left:8px;">-${disc}%</span>
+        </div>
+        <div class="qv-qty">
+          <button class="qv-qty-btn" onclick="changeQvQty(-1)">−</button>
+          <span class="qv-qty-num" id="qvQtyNum">1</span>
+          <button class="qv-qty-btn" onclick="changeQvQty(1)">+</button>
+          <span style="font-size:0.82rem;color:var(--text-light);">${isBangla?'কেজি':'kg'}</span>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="addToCartQv(${p.id})">
+          🛒 ${isBangla?'কার্টে যোগ করুন':'Add to Cart'}
+        </button>
+      </div>
+    </div>`;
+  document.getElementById('quickViewModal').classList.add('open');
+}
+function changeQvQty(d) {
+  qvQty = Math.max(1, qvQty + d);
+  document.getElementById('qvQtyNum').textContent = qvQty;
+}
+function addToCartQv(id) {
+  const p = mangoProducts.find(x=>x.id===id);
+  if (!p) return;
+  const existing = cart.find(c=>c.id===id);
+  if (existing) existing.qty += qvQty; else cart.push({...p, qty: qvQty});
+  saveCart(); updateCartCount(); renderProducts();
+  closeModal('quickViewModal');
+  showToast('🛒 '+(currentLang==='bn'?p.nameBn+' কার্টে যোগ হয়েছে!':p.nameEn+' added to cart!'),'success');
+}
+
+// ===== CART =====
+function addToCart(id) {
+  const product = mangoProducts.find(p=>p.id===id);
+  if (!product) return;
+  const existing = cart.find(c=>c.id===id);
+  if (existing) existing.qty++; else cart.push({...product, qty:1});
+  saveCart(); updateCartCount(); renderProducts(); updateStickyBar();
+  showToast('🛒 '+(currentLang==='bn'?product.nameBn+' কার্টে যোগ হয়েছে!':product.nameEn+' added to cart!'),'success');
+}
+function saveCart() { localStorage.setItem('mangoCart', JSON.stringify(cart)); }
+function updateCartCount() { document.getElementById('cartCount').textContent = cart.reduce((s,i)=>s+i.qty,0); }
+function updateStickyBar() {
+  const count = cart.reduce((s,i)=>s+i.qty,0);
+  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById('stickyCartInfo').textContent = `${count} ${currentLang==='bn'?'পণ্য':'items'} · ৳${total}`;
+}
+function openCart() { renderCart(); document.getElementById('cartModal').classList.add('open'); }
+function renderCart() {
+  const content = document.getElementById('cartContent');
+  const actions = document.getElementById('cartActions');
+  const isBangla = currentLang === 'bn';
+  if (cart.length === 0) {
+    content.innerHTML = `<div class="empty-cart"><div class="empty-cart-icon">🛒</div><div class="empty-cart-text">${isBangla?'কার্ট খালি!':'Your cart is empty!'}</div><p style="font-size:0.85rem;color:var(--text-light);margin-top:8px;">${isBangla?'কিছু আম যোগ করুন':'Add some mangoes'}</p></div>`;
+    actions.innerHTML = ''; return;
+  }
+  const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const delivery = subtotal > 500 ? 0 : 60;
+  const couponDisc = appliedCoupon ? Math.round(subtotal*0.15) : 0;
+  const total = subtotal + delivery - couponDisc;
+  content.innerHTML = `<div class="cart-items">${cart.map(item=>`
+    <div class="cart-item">
+      <span class="cart-item-emoji">${item.emoji}</span>
+      <div><div class="cart-item-name">${isBangla?item.nameBn:item.nameEn}</div><div class="cart-item-price">৳${item.price} × ${item.qty}</div></div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+        <span class="qty-num">${item.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+        <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️</button>
+      </div>
+    </div>`).join('')}</div>
+  <div class="coupon-row">
+    <input class="coupon-input" type="text" id="couponInput" placeholder="MANGO15" value="${appliedCoupon?'MANGO15':''}">
+    <button class="coupon-btn" onclick="applyCoupon()">${isBangla?'প্রয়োগ করুন':'Apply'}</button>
+  </div>
+  <div class="cart-summary">
+    <div class="cart-row"><span>${isBangla?'সাবটোটাল':'Subtotal'}</span><span>৳${subtotal}</span></div>
+    <div class="cart-row"><span>${isBangla?'ডেলিভারি':'Delivery'}</span><span>${delivery===0?(isBangla?'বিনামূল্যে':'Free'):'৳'+delivery}</span></div>
+    ${couponDisc>0?`<div class="cart-row" style="color:var(--mango-green)"><span>${isBangla?'কুপন ছাড়':'Coupon Disc.'}</span><span>-৳${couponDisc}</span></div>`:''}
+    <div class="cart-total-row"><span>${isBangla?'মোট':'Total'}</span><span>৳${total}</span></div>
+  </div>`;
+  actions.innerHTML = `<button class="btn-primary" style="width:100%;justify-content:center;" onclick="openCheckout()">${isBangla?'অর্ডার করুন →':'Place Order →'}</button>
+  <button class="btn-secondary" style="width:100%;justify-content:center;margin-top:10px;" onclick="closeModal('cartModal')">${isBangla?'আরো কেনাকাটা':'Continue Shopping'}</button>`;
+}
+function applyCoupon() {
+  const val = document.getElementById('couponInput')?.value.trim().toUpperCase();
+  if (val === 'MANGO15') {
+    appliedCoupon = true; renderCart();
+    showToast('🎉 '+(currentLang==='bn'?'১৫% কুপন ছাড় প্রয়োগ হয়েছে!':'15% coupon applied!'),'success');
+  } else {
+    showToast(currentLang==='bn'?'ভুল কুপন কোড।':'Invalid coupon code.','error');
+  }
+}
+function changeQty(id, delta) {
+  const item = cart.find(c=>c.id===id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(c=>c.id!==id);
+  saveCart(); updateCartCount(); renderCart(); renderProducts(); updateStickyBar();
+}
+function removeFromCart(id) { cart = cart.filter(c=>c.id!==id); saveCart(); updateCartCount(); renderCart(); renderProducts(); updateStickyBar(); }
+function openOrders() { document.getElementById('userDropdown').classList.remove('open'); showToast(currentLang==='bn'?'📦 পূর্ববর্তী কোনো অর্ডার নেই।':'📦 No previous orders.'); }
+
+// ===== NEWSLETTER =====
+function subscribeNewsletter() {
+  const email = document.getElementById('nlEmail').value.trim();
+  if (!email || !email.includes('@')) { showToast(currentLang==='bn'?'সঠিক ইমেইল দিন।':'Enter a valid email.','error'); return; }
+  document.getElementById('nlEmail').value = '';
+  showToast('✅ '+(currentLang==='bn'?'সাবস্ক্রাইব সফল! ধন্যবাদ।':'Subscribed! Thank you.'),'success');
+}
+
+// ===== CHECKOUT =====
+function openCheckout() {
+  if (!currentUser) { closeModal('cartModal'); openAuth('login'); showToast(currentLang==='bn'?'অর্ডার করতে লগইন করুন।':'Please login to order.'); return; }
+  closeModal('cartModal'); checkoutStep=1; renderCheckout();
+  document.getElementById('checkoutModal').classList.add('open');
+}
+function renderCheckout() {
+  const isBangla = currentLang==='bn';
+  const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const delivery = subtotal>500?0:60;
+  const couponDisc = appliedCoupon?Math.round(subtotal*0.15):0;
+  const total = subtotal+delivery-couponDisc;
+  const content = document.getElementById('checkoutContent');
+  if (checkoutStep===3) {
+    content.innerHTML=`<div class="success-animation"><div class="success-icon">🎉</div><div class="success-title">${isBangla?'অর্ডার সফল হয়েছে!':'Order Placed!'}</div><p class="success-desc">${isBangla?'আপনার অর্ডার গ্রহণ হয়েছে। ৪৮ ঘণ্টায় ডেলিভারি পাবেন।':'Your order is confirmed. Delivery within 48 hours.'}</p><button class="btn-primary" style="margin-top:20px;" onclick="finishCheckout()">${isBangla?'ঠিক আছে ✓':'Got it ✓'}</button></div>`;
+    return;
+  }
+  const steps = isBangla?['ঠিকানা','পেমেন্ট','নিশ্চিত']:['Address','Payment','Confirm'];
+  const stepsHTML = steps.map((s,i)=>`<div class="step ${i+1===checkoutStep?'active':i+1<checkoutStep?'done':''}"><div class="step-num">${i+1<checkoutStep?'✓':i+1}</div>${s}</div>`).join('');
+  let formHTML='';
+  if (checkoutStep===1) {
+    formHTML=`<div class="checkout-form">
+      <div class="form-group"><label>${isBangla?'পুরো নাম':'Full Name'}</label><input type="text" id="coName" value="${currentUser?currentUser.name:''}" placeholder="${isBangla?'নাম':'Name'}" style="width:100%;padding:11px 14px;border:2px solid rgba(255,184,0,0.2);border-radius:8px;font-size:0.93rem;font-family:inherit;color:var(--text-primary);background:var(--input-bg);outline:none;"></div>
+      <div class="form-group"><label>${isBangla?'ফোন':'Phone'}</label><input type="tel" id="coPhone" value="${currentUser?currentUser.phone:''}" placeholder="01XXXXXXXXX" style="width:100%;padding:11px 14px;border:2px solid rgba(255,184,0,0.2);border-radius:8px;font-size:0.93rem;font-family:inherit;color:var(--text-primary);background:var(--input-bg);outline:none;"></div>
+      <div class="form-group"><label>${isBangla?'পূর্ণ ঠিকানা':'Address'}</label><textarea id="coAddress" placeholder="${isBangla?'বাসা, রাস্তা, এলাকা...':'House, road, area...'}" style="width:100%;padding:11px 14px;border:2px solid rgba(255,184,0,0.2);border-radius:8px;font-size:0.93rem;font-family:inherit;color:var(--text-primary);background:var(--input-bg);outline:none;min-height:80px;resize:vertical;"></textarea></div>
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="checkoutNext()">${isBangla?'পরবর্তী →':'Next →'}</button>
+    </div>`;
+  } else if (checkoutStep===2) {
+    formHTML=`<div class="checkout-form">
+      <div class="form-group"><label>${isBangla?'পেমেন্ট পদ্ধতি':'Payment'}</label>
+      <select id="coPayment" style="width:100%;padding:11px 14px;border:2px solid rgba(255,184,0,0.2);border-radius:8px;font-size:0.93rem;background:var(--input-bg);color:var(--text-primary);outline:none;font-family:inherit;">
+        <option>বিকাশ (bKash)</option><option>নগদ (Nagad)</option><option>রকেট (Rocket)</option>
+        <option>${isBangla?'ক্যাশ অন ডেলিভারি':'Cash on Delivery'}</option>
+      </select></div>
+      <div class="cart-summary" style="margin-top:12px;">
+        <div class="cart-row"><span>${isBangla?'পণ্য':'Items'}</span><span>${cart.reduce((s,i)=>s+i.qty,0)}</span></div>
+        ${couponDisc>0?`<div class="cart-row" style="color:var(--mango-green)"><span>${isBangla?'কুপন':'Coupon'}</span><span>-৳${couponDisc}</span></div>`:''}
+        <div class="cart-total-row"><span>${isBangla?'মোট':'Total'}</span><span>৳${total}</span></div>
+      </div>
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="checkoutNext()">${isBangla?'অর্ডার নিশ্চিত করুন ✓':'Confirm Order ✓'}</button>
+      <button onclick="checkoutStep=1;renderCheckout()" style="width:100%;margin-top:10px;background:none;border:none;color:var(--text-light);cursor:pointer;font-size:0.88rem;">← ${isBangla?'ফিরে যান':'Back'}</button>
+    </div>`;
+  }
+  content.innerHTML=`<div class="modal-title">${isBangla?'অর্ডার করুন':'Place Order'}</div><div class="checkout-steps" style="margin-bottom:24px;">${stepsHTML}</div>${formHTML}`;
+}
+function checkoutNext() {
+  const isBangla=currentLang==='bn';
+  if (checkoutStep===1) {
+    const name=document.getElementById('coName')?.value.trim();
+    const phone=document.getElementById('coPhone')?.value.trim();
+    const addr=document.getElementById('coAddress')?.value.trim();
+    if (!name||!phone||!addr) { showToast(isBangla?'সব তথ্য পূরণ করুন।':'Fill all fields.','error'); return; }
+    checkoutStep=2;
+  } else if (checkoutStep===2) {
+    checkoutStep=3; cart=[]; saveCart(); updateCartCount(); renderProducts(); updateStickyBar();
+    appliedCoupon=false;
+    document.getElementById('stickyCartBar').classList.remove('visible');
+  }
+  renderCheckout();
+}
+function finishCheckout() { closeModal('checkoutModal'); showToast('🥭 '+(currentLang==='bn'?'অর্ডার সম্পন্ন! ধন্যবাদ।':'Order complete! Thank you.'),'success'); }
+
+// ===== TESTIMONIALS =====
+function renderTestimonials() {
+  const isBangla=currentLang==='bn';
+  document.getElementById('testimonialsGrid').innerHTML=testimonials.map(t=>`
+    <div class="testimonial-card">
+      <div class="reviewer"><div class="reviewer-avatar">${t.avatar}</div><div><div class="reviewer-name">${isBangla?t.nameBn:t.nameEn}</div><div class="reviewer-location">📍 ${isBangla?t.locBn:t.locEn}</div></div></div>
+      <div class="stars" style="margin-bottom:10px;">${'★'.repeat(t.stars)}${'☆'.repeat(5-t.stars)}</div>
+      <p class="review-text">${isBangla?t.textBn:t.textEn}</p>
+    </div>`).join('');
+}
+
+// ===== CONTACT =====
+function sendContact() {
+  const name=document.getElementById('contactName').value.trim();
+  const msg=document.getElementById('contactMsg').value.trim();
+  if (!name||!msg) { showToast(currentLang==='bn'?'নাম ও বার্তা পূরণ করুন।':'Fill name and message.','error'); return; }
+  document.getElementById('contactName').value='';
+  document.getElementById('contactPhone').value='';
+  document.getElementById('contactMsg').value='';
+  showToast('✅ '+(currentLang==='bn'?'বার্তা পাঠানো হয়েছে!':'Message sent!'),'success');
+}
+
+// ===== MODAL =====
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function handleOverlayClick(event,modalId) { if (event.target===document.getElementById(modalId)) closeModal(modalId); }
+
+// ===== TOAST =====
+function showToast(msg, type='') {
+  const container=document.getElementById('toastContainer');
+  const toast=document.createElement('div');
+  toast.className='toast '+type;
+  toast.textContent=msg;
+  container.appendChild(toast);
+  setTimeout(()=>{ toast.style.transition='all 0.3s ease'; toast.style.opacity='0'; toast.style.transform='translateX(100%)'; setTimeout(()=>toast.remove(),300); },3000);
+}
+
+// ===== INIT =====
+updateAuthUI();
+renderProducts();
+renderTestimonials();
+updateCartCount();
+updateStickyBar();
+</script>
+</body>
+</html>
