@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Mango - আমের রাজ্য</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
@@ -68,7 +68,8 @@ body {
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--navbar-border);
   padding: 0 5%;
-  height: 70px;
+  padding-top: max(0px, env(safe-area-inset-top));
+  height: calc(70px + env(safe-area-inset-top, 0px));
   display: flex; align-items: center; justify-content: space-between;
   transition: all 0.3s ease;
   box-shadow: 0 2px 20px rgba(255,140,0,0.08);
@@ -146,10 +147,11 @@ body {
 .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
 .mobile-menu {
-  display: none; position: fixed; top: 70px; left: 0; right: 0;
+  display: none; position: fixed; top: calc(70px + env(safe-area-inset-top, 0px)); left: 0; right: 0;
   background: var(--navbar-bg); backdrop-filter: blur(20px);
   border-bottom: 2px solid var(--navbar-border);
   padding: 20px 5%; z-index: 999;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   flex-direction: column; gap: 4px; box-shadow: var(--shadow-md);
 }
 .mobile-menu.open { display: flex; }
@@ -174,7 +176,7 @@ body {
   flex-wrap: wrap;
   position: relative;
   z-index: 999;
-  margin-top: 70px;
+  margin-top: calc(70px + env(safe-area-inset-top, 0px));
 }
 @keyframes shimmerBg { 0%{background-position:0% 0} 100%{background-position:200% 0} }
 .ann-code { background: rgba(255,200,80,0.2); border: 1px solid rgba(255,200,80,0.4); padding: 2px 10px; border-radius: 12px; color: #FFCA28; font-weight: 800; letter-spacing: 1px; }
@@ -707,6 +709,7 @@ footer::after {
   backdrop-filter: blur(20px);
   border-top: 1px solid var(--navbar-border);
   padding: 12px 5%;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
   justify-content: space-between; align-items: center;
   box-shadow: 0 -4px 20px rgba(255,140,0,0.12);
 }
@@ -784,7 +787,7 @@ footer::after {
   .newsletter-form { flex-direction: column; align-items: stretch; }
   .toast-container { bottom: 70px; right: 12px; left: 12px; }
   .toast { max-width: 100%; }
-  .sticky-cart-bar { padding: 10px 4%; }
+  .sticky-cart-bar { padding: 10px 4%; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
   .back-top { right: 12px; bottom: 72px; }
 }
 
@@ -879,7 +882,7 @@ footer::after {
     </div>
     <div class="hero-visual">
       <div class="hero-mango-blob">
-        <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&h=400&fit=crop&auto=format&q=80" alt="Fresh mangoes" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <img src="https://images.pexels.com/photos/2294471/pexels-photo-2294471.jpeg?w=400&h=400&fit=crop&auto=format&q=80" alt="Fresh mangoes" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
         <span style="display:none;font-size:9rem;">🥭</span>
       </div>
       <div class="floating-badges">
@@ -1016,7 +1019,7 @@ footer::after {
     <div class="about-grid">
       <div class="about-visual">
         <div class="about-blob">
-          <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=400&h=400&fit=crop&auto=format&q=80" alt="Mango orchard" onerror="this.style.display='none';this.parentElement.innerHTML+='<span style=\'font-size:8rem;\'>🥭</span>'">
+          <img src="https://images.pexels.com/photos/693794/pexels-photo-693794.jpeg?w=400&h=400&fit=crop&auto=format&q=80" alt="Mango orchard" onerror="this.style.display='none';this.parentElement.innerHTML+='<span style=\'font-size:8rem;\'>🥭</span>'">
         </div>
         <div class="about-cards">
           <div class="a-card"><span class="a-card-icon">🌱</span><span data-bn="জৈব চাষ" data-en="Organic Farming">জৈব চাষ</span></div>
@@ -1275,14 +1278,14 @@ footer::after {
 <script>
 // ===== DATA =====
 const mangoProducts = [
-  { id:1, emoji:'🥭', img:'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'ফজলি আম', nameEn:'Fazli Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:180, oldPrice:220, unit:'কেজি', unitEn:'kg', rating:4.9, reviews:312, badge:'hot', category:'rajshahi', descBn:'বড় আকারের সুমিষ্টি আম। রাজশাহীর বিখ্যাত জাত।', descEn:'Large and very sweet mango, famous variety from Rajshahi.' },
-  { id:2, emoji:'🟡', img:'https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'ল্যাংড়া আম', nameEn:'Langra Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:220, oldPrice:280, unit:'কেজি', unitEn:'kg', rating:4.8, reviews:256, badge:'premium', category:'chapai', descBn:'রসালো ও সুগন্ধি আম। চাঁপাইনবাবগঞ্জের গর্ব।', descEn:'Juicy and aromatic mango. The pride of Chapainawabganj.' },
-  { id:3, emoji:'🟠', img:'https://images.unsplash.com/photo-1605027990121-cbae9e0642df?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'হিমসাগর আম', nameEn:'Himsagar Mango', originBn:'সাতক্ষীরা', originEn:'Satkhira', price:250, oldPrice:300, unit:'কেজি', unitEn:'kg', rating:4.9, reviews:198, badge:'premium', category:'satkhira', descBn:'অত্যন্ত মিষ্টি ও সুগন্ধি। সাতক্ষীরার সেরা আম।', descEn:'Extremely sweet and fragrant. Best mango from Satkhira.' },
-  { id:4, emoji:'🥭', img:'https://images.unsplash.com/photo-1519096845289-95806ee03a1a?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'গোপালভোগ আম', nameEn:'Gopalbhog Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:200, oldPrice:240, unit:'কেজি', unitEn:'kg', rating:4.7, reviews:145, badge:'new', category:'rajshahi', descBn:'আগাম জাতের আম। সুন্দর হলুদ রঙের ও মিষ্টি।', descEn:'Early season mango with beautiful yellow color and sweet taste.' },
-  { id:5, emoji:'🟡', img:'https://images.unsplash.com/photo-1641420498571-3e8424de5f7c?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'আম্রপালি আম', nameEn:'Amrapali Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:160, oldPrice:200, unit:'কেজি', unitEn:'kg', rating:4.6, reviews:189, badge:null, category:'chapai', descBn:'মাঝারি আকারের মিষ্টি আম। সারা দেশে জনপ্রিয়।', descEn:'Medium-sized sweet mango. Popular all over the country.' },
-  { id:6, emoji:'🟠', img:'https://images.unsplash.com/photo-1590502160462-58b41354f588?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'মিশ্রি ভোগ আম', nameEn:'Mishri Bhog Mango', originBn:'সাতক্ষীরা', originEn:'Satkhira', price:280, oldPrice:340, unit:'কেজি', unitEn:'kg', rating:4.8, reviews:112, badge:'premium', category:'satkhira', descBn:'মিষ্টির রাজা। মুখে দিলেই মিষ্টি গলে যায়।', descEn:'King of sweetness. Melts in your mouth.' },
-  { id:7, emoji:'🥭', img:'https://images.unsplash.com/photo-1618897996318-5a901fa18a5f?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'খিরসাপাতি আম', nameEn:'Khirsapat Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:300, oldPrice:360, unit:'কেজি', unitEn:'kg', rating:5.0, reviews:78, badge:'premium', category:'chapai', descBn:'সর্বোচ্চ মানের প্রিমিয়াম আম। অতুলনীয় স্বাদ।', descEn:'Highest quality premium mango with unmatched taste.' },
-  { id:8, emoji:'🟡', img:'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=300&fit=crop&auto=format&q=80', nameBn:'লখনা আম', nameEn:'Lakhna Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:140, oldPrice:170, unit:'কেজি', unitEn:'kg', rating:4.5, reviews:234, badge:'new', category:'rajshahi', descBn:'সাশ্রয়ী দামে সুস্বাদু আম। পরিবারের জন্য আদর্শ।', descEn:'Delicious mango at an affordable price. Ideal for the family.' },
+  { id:1, emoji:'🥭', img:'https://images.pexels.com/photos/2294471/pexels-photo-2294471.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'ফজলি আম', nameEn:'Fazli Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:180, oldPrice:220, unit:'কেজি', unitEn:'kg', rating:4.9, reviews:312, badge:'hot', category:'rajshahi', descBn:'বড় আকারের সুমিষ্টি আম। রাজশাহীর বিখ্যাত জাত।', descEn:'Large and very sweet mango, famous variety from Rajshahi.' },
+  { id:2, emoji:'🟡', img:'https://images.pexels.com/photos/4023132/pexels-photo-4023132.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'ল্যাংড়া আম', nameEn:'Langra Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:220, oldPrice:280, unit:'কেজি', unitEn:'kg', rating:4.8, reviews:256, badge:'premium', category:'chapai', descBn:'রসালো ও সুগন্ধি আম। চাঁপাইনবাবগঞ্জের গর্ব।', descEn:'Juicy and aromatic mango. The pride of Chapainawabganj.' },
+  { id:3, emoji:'🟠', img:'https://images.pexels.com/photos/5945668/pexels-photo-5945668.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'হিমসাগর আম', nameEn:'Himsagar Mango', originBn:'সাতক্ষীরা', originEn:'Satkhira', price:250, oldPrice:300, unit:'কেজি', unitEn:'kg', rating:4.9, reviews:198, badge:'premium', category:'satkhira', descBn:'অত্যন্ত মিষ্টি ও সুগন্ধি। সাতক্ষীরার সেরা আম।', descEn:'Extremely sweet and fragrant. Best mango from Satkhira.' },
+  { id:4, emoji:'🥭', img:'https://images.pexels.com/photos/434295/pexels-photo-434295.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'গোপালভোগ আম', nameEn:'Gopalbhog Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:200, oldPrice:240, unit:'কেজি', unitEn:'kg', rating:4.7, reviews:145, badge:'new', category:'rajshahi', descBn:'আগাম জাতের আম। সুন্দর হলুদ রঙের ও মিষ্টি।', descEn:'Early season mango with beautiful yellow color and sweet taste.' },
+  { id:5, emoji:'🟡', img:'https://images.pexels.com/photos/918643/pexels-photo-918643.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'আম্রপালি আম', nameEn:'Amrapali Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:160, oldPrice:200, unit:'কেজি', unitEn:'kg', rating:4.6, reviews:189, badge:null, category:'chapai', descBn:'মাঝারি আকারের মিষ্টি আম। সারা দেশে জনপ্রিয়।', descEn:'Medium-sized sweet mango. Popular all over the country.' },
+  { id:6, emoji:'🟠', img:'https://images.pexels.com/photos/12977998/pexels-photo-12977998.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'মিশ্রি ভোগ আম', nameEn:'Mishri Bhog Mango', originBn:'সাতক্ষীরা', originEn:'Satkhira', price:280, oldPrice:340, unit:'কেজি', unitEn:'kg', rating:4.8, reviews:112, badge:'premium', category:'satkhira', descBn:'মিষ্টির রাজা। মুখে দিলেই মিষ্টি গলে যায়।', descEn:'King of sweetness. Melts in your mouth.' },
+  { id:7, emoji:'🥭', img:'https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'খিরসাপাতি আম', nameEn:'Khirsapat Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:300, oldPrice:360, unit:'কেজি', unitEn:'kg', rating:5.0, reviews:78, badge:'premium', category:'chapai', descBn:'সর্বোচ্চ মানের প্রিমিয়াম আম। অতুলনীয় স্বাদ।', descEn:'Highest quality premium mango with unmatched taste.' },
+  { id:8, emoji:'🟡', img:'https://images.pexels.com/photos/1656666/pexels-photo-1656666.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'লখনা আম', nameEn:'Lakhna Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:140, oldPrice:170, unit:'কেজি', unitEn:'kg', rating:4.5, reviews:234, badge:'new', category:'rajshahi', descBn:'সাশ্রয়ী দামে সুস্বাদু আম। পরিবারের জন্য আদর্শ।', descEn:'Delicious mango at an affordable price. Ideal for the family.' },
 ];
 
 const testimonials = [
