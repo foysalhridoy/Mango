@@ -78,7 +78,6 @@ body {
 }
 .navbar.scrolled { box-shadow: var(--shadow-sm); }
 
-/* ===== LOGO ===== */
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
   text-decoration: none;
@@ -124,7 +123,6 @@ body {
 }
 .nav-links a:hover { background: rgba(255,184,0,0.15); color: var(--mango-deep); }
 
-/* ===== NAVBAR ACTIONS ===== */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -194,6 +192,7 @@ body {
 .mobile-menu a { text-decoration: none; color: var(--text-secondary); font-size: 1rem; padding: 12px 16px; border-radius: var(--radius-sm); font-weight: 500; transition: all 0.2s ease; }
 .mobile-menu a:hover { background: rgba(255,184,0,0.15); color: var(--mango-deep); }
 
+/* FIX 4: lang toggle hidden on mobile, shown in hamburger menu */
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
@@ -622,7 +621,18 @@ footer::after {
   border-radius: 12px; display: flex; align-items: center; justify-content: center;
   font-size: 1rem; text-decoration: none; transition: all 0.25s ease;
 }
-.social-link:hover { background: var(--mango-yellow); border-color: var(--mango-yellow); transform: translateY(-3px); box-shadow: 0 6px 16px rgba(255,184,0,0.25); }
+.social-link:hover {
+  background: var(--mango-yellow); border-color: var(--mango-yellow);
+  transform: translateY(-3px); box-shadow: 0 6px 16px rgba(255,184,0,0.25);
+}
+/* FIX 1: SVG stroke color on social icon hover */
+.social-link:hover svg path,
+.social-link:hover svg rect,
+.social-link:hover svg circle,
+.social-link:hover svg polygon,
+.social-link:hover svg ellipse {
+  stroke: #1A0A00;
+}
 
 .footer-col-title {
   font-family: 'Noto Serif Bengali', serif; font-size: 1.05rem; font-weight: 700;
@@ -774,7 +784,7 @@ footer::after {
 .sticky-cart-info { font-family: 'Noto Serif Bengali', serif; font-weight: 700; font-size: 1rem; color: var(--text-primary); }
 .sticky-cart-sub { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
 
-/* ===== BACK TO TOP ===== */
+/* ===== FIX 2: BACK TO TOP — Mango with chevron arrows ===== */
 .back-top {
   position: fixed; bottom: 84px; right: 20px; z-index: 800;
   width: 62px; height: 72px;
@@ -802,6 +812,16 @@ footer::after {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 0.85; }
 }
+/* Chevron bounce animation */
+@keyframes chevronBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.85; }
+  50% { transform: translateY(-3px); opacity: 1; }
+}
+@keyframes chevronBounceSlow {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(-3px); opacity: 0.9; }
+}
+
 .back-top:hover {
   transform: translateY(-6px) scale(1.14) rotate(3deg);
 }
@@ -834,6 +854,15 @@ footer::after {
 .mango-sparkle-1, .mango-sparkle-2 { opacity: 0; }
 .back-top:hover .mango-sparkle-1 { animation: sparkle1 0.9s ease-out infinite; }
 .back-top:hover .mango-sparkle-2 { animation: sparkle2 0.9s 0.15s ease-out infinite; }
+/* Chevron arrows animation */
+.mango-chevron-top {
+  animation: chevronBounce 1.2s ease-in-out infinite;
+  transform-origin: center;
+}
+.mango-chevron-bottom {
+  animation: chevronBounceSlow 1.2s 0.2s ease-in-out infinite;
+  transform-origin: center;
+}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
@@ -923,17 +952,11 @@ footer::after {
           <stop offset="100%" stop-color="#558B2F"/>
         </linearGradient>
       </defs>
-      <!-- Mango body -->
       <path d="M50 105 C24 96 7 74 8 50 C9 28 26 12 50 11 C74 12 91 28 92 50 C93 74 76 96 50 105Z" fill="url(#nlMg)"/>
-      <!-- Shine -->
       <ellipse cx="36" cy="38" rx="13" ry="19" fill="rgba(255,255,255,0.2)"/>
-      <!-- Stem -->
       <path d="M50 11 C50 5 55 0 61 -1 C66 -2 67 4 63 7 C59 9 55 10 50 11Z" fill="#33691E"/>
-      <!-- Left leaf -->
       <path d="M53 10 C46 1 26 -3 18 4 C15 7 18 13 24 13 C34 14 45 11 53 10Z" fill="url(#nlLeafL)"/>
-      <!-- Right leaf -->
       <path d="M55 9 C64 0 84 -3 90 4 C93 7 89 13 82 13 C72 13 63 11 55 9Z" fill="url(#nlLeafR)"/>
-      <!-- Leaf veins -->
       <path d="M53 10 C44 5 30 2 21 5" stroke="#2E7D32" stroke-width="1.2" fill="none" stroke-linecap="round"/>
       <path d="M55 9 C66 4 80 1 88 5" stroke="#2E7D32" stroke-width="1.2" fill="none" stroke-linecap="round"/>
     </svg>
@@ -982,7 +1005,7 @@ footer::after {
   <span data-bn="৫০০ টাকার উপর ফ্রি ডেলিভারি" data-en="Free delivery over ৳500">৫০০ টাকার উপর ফ্রি ডেলিভারি</span>
 </div>
 
-<!-- MOBILE MENU -->
+<!-- MOBILE MENU — FIX 4: lang toggle inside hamburger menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#products" onclick="closeMenu()" data-bn="আমের বাজার" data-en="Products">আমের বাজার</a>
   <a href="#how" onclick="closeMenu()" data-bn="কিভাবে কাজ করে" data-en="How It Works">কিভাবে কাজ করে</a>
@@ -990,7 +1013,7 @@ footer::after {
   <a href="#reviews" onclick="closeMenu()" data-bn="রিভিউ" data-en="Reviews">রিভিউ</a>
   <a href="#contact" onclick="closeMenu()" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a>
   <div style="border-top:1px solid rgba(255,184,0,0.2);margin-top:8px;padding-top:12px;">
-    <button onclick="toggleLang();closeMenu();" style="background:linear-gradient(135deg,var(--mango-green),#1a5e00);color:white;border:none;padding:10px 20px;border-radius:20px;font-size:0.9rem;font-family:'Noto Sans Bengali',sans-serif;font-weight:600;cursor:pointer;width:100%;display:flex;align-items:center;gap:8px;justify-content:center;" id="mobileLangToggle">🌐 <span data-bn="English এ দেখুন" data-en="বাংলায় দেখুন">English এ দেখুন</span></button>
+    <button id="mobileLangToggle" onclick="toggleLang();closeMenu();" style="background:linear-gradient(135deg,var(--mango-green),#1a5e00);color:white;border:none;padding:10px 20px;border-radius:20px;font-size:0.9rem;font-family:'Noto Sans Bengali',sans-serif;font-weight:600;cursor:pointer;width:100%;display:flex;align-items:center;gap:8px;justify-content:center;">🌐 <span>English এ দেখুন</span></button>
   </div>
 </div>
 
@@ -1242,7 +1265,7 @@ footer::after {
         </div>
         <div class="contact-item">
           <div class="contact-icon">✉️</div>
-          <div><div class="contact-label" data-bn="ইমেইল" data-en="Email">ইমেইল</div><div class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb3beb7b7b49bb6bab5bcb4f5b8b4b6f5b9bf">[email&#160;protected]</a></div></div>
+          <div><div class="contact-label" data-bn="ইমেইল" data-en="Email">ইমেইল</div><div class="contact-value">hello@mangobd.com</div></div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">⏰</div>
@@ -1286,6 +1309,7 @@ footer::after {
       <p class="footer-desc" data-bn="বাংলাদেশের সেরা অনলাইন আম বিক্রয় প্ল্যাটফর্ম। রাজশাহী, চাঁপাইনবাবগঞ্জ ও সাতক্ষীরার তাজা আম সরাসরি আপনার দরজায়।" data-en="Bangladesh's premier online mango marketplace. Fresh mangoes delivered straight to your door.">
         বাংলাদেশের সেরা অনলাইন আম বিক্রয় প্ল্যাটফর্ম। রাজশাহী, চাঁপাইনবাবগঞ্জ ও সাতক্ষীরার তাজা আম সরাসরি আপনার দরজায়।
       </p>
+      <!-- FIX 1: Footer Social Icons - proper SVG outline icons in golden stroke -->
       <div class="social-links">
         <a class="social-link" href="#" title="Facebook">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1419,7 +1443,7 @@ footer::after {
   </button>
 </div>
 
-<!-- BACK TO TOP -->
+<!-- FIX 2: BACK TO TOP — Mango character with two curved chevron arrows -->
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="উপরে যান">
   <svg viewBox="-8 -8 116 130" xmlns="http://www.w3.org/2000/svg" overflow="visible">
     <defs>
@@ -1445,41 +1469,47 @@ footer::after {
         <stop offset="0%" stop-color="#FF8A65" stop-opacity="0.65"/>
         <stop offset="100%" stop-color="#FF8A65" stop-opacity="0"/>
       </radialGradient>
-      <filter id="softShadow" x="-20%" y="-10%" width="140%" height="140%">
-        <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#FF8C00" flood-opacity="0.38"/>
-      </filter>
       <filter id="glowShadow" x="-30%" y="-20%" width="160%" height="160%">
         <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#FFB800" flood-opacity="0.3"/>
         <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#FF8C00" flood-opacity="0.45"/>
       </filter>
     </defs>
+    <!-- Mango body -->
     <g filter="url(#glowShadow)">
       <path d="M50 108 C20 100 4 76 5 52 C6 28 22 10 50 8 C78 10 94 28 95 52 C96 76 80 100 50 108 Z" fill="url(#mgMain)"/>
       <path d="M50 108 C20 100 4 76 5 52 C6 28 22 10 50 8 C78 10 94 28 95 52 C96 76 80 100 50 108 Z" fill="url(#mgShadow)"/>
       <ellipse cx="36" cy="36" rx="20" ry="26" fill="url(#mgShine)"/>
     </g>
+    <!-- Stem & Leaves -->
     <path d="M50 8 C50 3 54 -2 60 -3 C65 -4 67 0 64 3 C61 6 56 7 50 8 Z" fill="#33691E" stroke="#2E7D32" stroke-width="0.5"/>
     <path d="M52 5 C46 -4 30 -8 24 -2 C22 0 24 4 28 5 C36 7 46 5 52 5 Z" fill="#558B2F"/>
     <path d="M54 4 C62 -6 80 -8 84 -2 C86 0 83 5 78 5 C70 6 62 5 54 4 Z" fill="#689F38"/>
     <path d="M52 5 C44 0 32 -3 26 -1" stroke="#33691E" stroke-width="0.7" fill="none" stroke-linecap="round"/>
     <path d="M54 4 C64 -1 76 -4 82 -2" stroke="#33691E" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+    <!-- Cheeks -->
     <ellipse class="mango-cheek" cx="27" cy="65" rx="11" ry="8" fill="url(#cheekL)"/>
     <ellipse class="mango-cheek" cx="73" cy="65" rx="11" ry="8" fill="url(#cheekR)"/>
-    <g class="mango-eye-left" transform="translate(35, 52)">
+    <!-- Eyes -->
+    <g class="mango-eye-left" transform="translate(35, 48)">
       <rect x="-5" y="-7" width="10" height="13" rx="5" fill="#3E2723"/>
       <circle cx="-1" cy="-3" r="2.5" fill="white" opacity="0.9"/>
-      <circle cx="2" cy="-5" r="1.2" fill="white" opacity="0.7"/>
     </g>
-    <g class="mango-eye-right" transform="translate(65, 52)">
+    <g class="mango-eye-right" transform="translate(65, 48)">
       <rect x="-5" y="-7" width="10" height="13" rx="5" fill="#3E2723"/>
       <circle cx="-1" cy="-3" r="2.5" fill="white" opacity="0.9"/>
-      <circle cx="2" cy="-5" r="1.2" fill="white" opacity="0.7"/>
     </g>
-    <path d="M39 74 Q50 83 61 74" stroke="#3E2723" stroke-width="2.8" fill="none" stroke-linecap="round"/>
-    <ellipse cx="50" cy="80" rx="5" ry="3.5" fill="#EF9A9A" opacity="0.85"/>
-    <line x1="50" y1="88" x2="50" y2="48" stroke="rgba(255,255,255,0)" stroke-width="0"/>
-    <path d="M32 78 Q50 52 68 78" stroke="rgba(255,255,255,0.92)" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M39 62 Q50 48 61 62" stroke="rgba(255,255,255,0.65)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Smile -->
+    <path d="M40 63 Q50 70 60 63" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- FIX 2: Two curved chevron arrows pointing upward, inside mango belly -->
+    <!-- Bottom chevron (dimmer, slightly lower) -->
+    <g class="mango-chevron-bottom">
+      <path d="M33 98 Q50 84 67 98" stroke="rgba(255,255,255,0.55)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <!-- Top chevron (brighter, slightly higher) -->
+    <g class="mango-chevron-top">
+      <path d="M36 86 Q50 72 64 86" stroke="rgba(255,255,255,0.9)" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <!-- Sparkles on hover -->
     <g class="mango-sparkle-1" transform="translate(10, 30)">
       <path d="M0,-8 L1.5,-1.5 L8,0 L1.5,1.5 L0,8 L-1.5,1.5 L-8,0 L-1.5,-1.5 Z" fill="#FFD740" opacity="0.9"/>
     </g>
@@ -1489,7 +1519,8 @@ footer::after {
   </svg>
 </button>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+// ===== DATA =====
 const mangoProducts = [
   { id:1, emoji:'🥭', img:'https://images.pexels.com/photos/2294471/pexels-photo-2294471.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'ফজলি আম', nameEn:'Fazli Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:180, oldPrice:220, unit:'কেজি', unitEn:'kg', rating:4.9, reviews:312, badge:'hot', category:'rajshahi', descBn:'বড় আকারের সুমিষ্টি আম। রাজশাহীর বিখ্যাত জাত।', descEn:'Large and very sweet mango, famous variety from Rajshahi.' },
   { id:2, emoji:'🟡', img:'https://images.pexels.com/photos/4023132/pexels-photo-4023132.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'ল্যাংড়া আম', nameEn:'Langra Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:220, oldPrice:280, unit:'কেজি', unitEn:'kg', rating:4.8, reviews:256, badge:'premium', category:'chapai', descBn:'রসালো ও সুগন্ধি আম। চাঁপাইনবাবগঞ্জের গর্ব।', descEn:'Juicy and aromatic mango. The pride of Chapainawabganj.' },
@@ -1505,11 +1536,12 @@ const testimonials = [
   { nameBn:'রাহেলা বেগম', nameEn:'Rahela Begum', locBn:'ঢাকা, মিরপুর', locEn:'Dhaka, Mirpur', avatar:'র', stars:5, textBn:'অসাধারণ মিষ্টি ফজলি আম পেলাম। ২৪ ঘণ্টার মধ্যে ডেলিভারি পেয়েছি।', textEn:'Got amazingly sweet Fazli mangoes. Delivery within 24 hours.' },
   { nameBn:'মোঃ কামরুল হাসান', nameEn:'Md. Kamrul Hasan', locBn:'চট্টগ্রাম', locEn:'Chittagong', avatar:'ক', stars:5, textBn:'হিমসাগর আম খেয়ে মনে হলো সরাসরি বাগানে আছি। তাজা, রসালো এবং অবিশ্বাস্য মিষ্টি।', textEn:'Eating Himsagar mango felt like being in the orchard. Fresh, juicy and incredibly sweet.' },
   { nameBn:'সুমাইয়া আক্তার', nameEn:'Sumaiya Akter', locBn:'সিলেট', locEn:'Sylhet', avatar:'স', stars:5, textBn:'ল্যাংড়া আমের স্বাদ একেবারে অনন্য। প্যাকেজিং খুবই ভালো।', textEn:'The taste of Langra mango is absolutely unique. Packaging was excellent.' },
-  { nameBn:'আরিফুল ইসলাম', nameEn:'Ariful Islam', locBn:'রাজশাহী', locEn:'Rajshahi', avatar:'আ', stars:5, textBn:'খিরসাপাতি আম সত্যিই প্রিমিয়াম। ওজনে ঠিকঠাক, মানে অসাধারণ।', textEn:"Khirsapat mango is truly premium. Accurate weight, exceptional quality." },
-  { nameBn:'নাসরিন খানম', nameEn:'Nasrin Khanam', locBn:'ময়মনসিংহ', locEn:'Mymensingh', avatar:'ন', stars:4, textBn:'গোপালভোগ আমের মিষ্টি গন্ধ ও স্বাদ অতুলনীয়।', textEn:"The sweet aroma and taste of Gopalbhog mango is unparalleled." },
-  { nameBn:'তানভীর আহমেদ', nameEn:'Tanvir Ahmed', locBn:'খুলনা', locEn:'Khulna', avatar:'ত', stars:5, textBn:'মিশ্রি ভোগ আম খেয়ে মুখে জল আসে। সাতক্ষীরার এই আম সত্যিই অনন্য।', textEn:"Mishri Bhog mango makes your mouth water. This mango from Satkhira is truly unique." },
+  { nameBn:'আরিফুল ইসলাম', nameEn:'Ariful Islam', locBn:'রাজশাহী', locEn:'Rajshahi', avatar:'আ', stars:5, textBn:'খিরসাপাতি আম সত্যিই প্রিমিয়াম। ওজনে ঠিকঠাক, মানে অসাধারণ।', textEn:'Khirsapat mango is truly premium. Accurate weight, exceptional quality.' },
+  { nameBn:'নাসরিন খানম', nameEn:'Nasrin Khanam', locBn:'ময়মনসিংহ', locEn:'Mymensingh', avatar:'ন', stars:4, textBn:'গোপালভোগ আমের মিষ্টি গন্ধ ও স্বাদ অতুলনীয়।', textEn:'The sweet aroma and taste of Gopalbhog mango is unparalleled.' },
+  { nameBn:'তানভীর আহমেদ', nameEn:'Tanvir Ahmed', locBn:'খুলনা', locEn:'Khulna', avatar:'ত', stars:5, textBn:'মিশ্রি ভোগ আম খেয়ে মুখে জল আসে। সাতক্ষীরার এই আম সত্যিই অনন্য।', textEn:'Mishri Bhog mango makes your mouth water. This mango from Satkhira is truly unique.' },
 ];
 
+// ===== STATE =====
 let cart = JSON.parse(localStorage.getItem('mangoCart') || '[]');
 let users = JSON.parse(localStorage.getItem('mangoUsers') || '[]');
 let currentUser = JSON.parse(localStorage.getItem('mangoUser') || 'null');
@@ -1520,17 +1552,14 @@ let checkoutStep = 1;
 let qvQty = 1;
 let appliedCoupon = false;
 
+// ===== FIX 4: Language toggle with proper mobile button sync =====
 function toggleLang() {
   currentLang = currentLang === 'bn' ? 'en' : 'bn';
   document.documentElement.lang = currentLang;
   document.getElementById('langToggle').textContent = currentLang === 'bn' ? 'EN' : 'বাং';
-  const mobileBtn = document.getElementById('mobileLangToggle');
-  if (mobileBtn) {
-    const span = mobileBtn.querySelector('span');
-    if (span) span.textContent = currentLang === 'bn' ? 'English এ দেখুন' : 'বাংলায় দেখুন';
-  }
   applyLang();
 }
+
 function applyLang() {
   const isBangla = currentLang === 'bn';
   document.querySelectorAll('[data-bn]').forEach(el => {
@@ -1539,11 +1568,17 @@ function applyLang() {
   document.querySelectorAll('[data-ph-bn]').forEach(el => {
     el.placeholder = isBangla ? el.dataset.phBn : el.dataset.phEn;
   });
+  // FIX 4: Sync mobile lang button text correctly
+  const mobileLangSpan = document.querySelector('#mobileLangToggle span');
+  if (mobileLangSpan) {
+    mobileLangSpan.textContent = isBangla ? 'English এ দেখুন' : 'বাংলায় দেখুন';
+  }
   renderProducts();
   renderTestimonials();
   renderCart();
 }
 
+// ===== SCROLL =====
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   document.getElementById('navbar').classList.toggle('scrolled', scrollY > 30);
@@ -1555,6 +1590,7 @@ window.addEventListener('scroll', () => {
     cartBar.classList.remove('visible');
   }
 });
+
 function toggleMenu() {
   document.getElementById('hamburger').classList.toggle('active');
   document.getElementById('mobileMenu').classList.toggle('open');
@@ -1564,18 +1600,28 @@ function closeMenu() {
   document.getElementById('mobileMenu').classList.remove('open');
 }
 
+// ===== FIX 3: Timer with localStorage — persists across reloads =====
 function updateTimer() {
-  if (!window._timerEnd) {
+  let endTime = localStorage.getItem('mangoTimerEnd');
+  if (!endTime) {
     const now = new Date();
-    window._timerEnd = new Date(now.getTime() + (10 * 86400000) + (5 * 3600000));
+    // Set 10 days 5 hours from now
+    endTime = new Date(now.getTime() + (10 * 86400000) + (5 * 3600000)).toISOString();
+    localStorage.setItem('mangoTimerEnd', endTime);
   }
+  const end = new Date(endTime);
   const now = new Date();
-  let diff = Math.max(0, window._timerEnd - now);
+  let diff = Math.max(0, end - now);
+  // If timer expired, reset it for next 10 days
+  if (diff === 0) {
+    localStorage.removeItem('mangoTimerEnd');
+    return;
+  }
   const days = Math.floor(diff / 86400000); diff %= 86400000;
   const hours = Math.floor(diff / 3600000); diff %= 3600000;
   const mins = Math.floor(diff / 60000); diff %= 60000;
   const secs = Math.floor(diff / 1000);
-  const pad = n => String(n).padStart(2,'0');
+  const pad = n => String(n).padStart(2, '0');
   document.getElementById('tDays').textContent = pad(days);
   document.getElementById('tHours').textContent = pad(hours);
   document.getElementById('tMins').textContent = pad(mins);
@@ -1584,6 +1630,7 @@ function updateTimer() {
 setInterval(updateTimer, 1000);
 updateTimer();
 
+// ===== AUTH =====
 function openAuth(tab) { document.getElementById('authModal').classList.add('open'); switchAuthTab(tab); }
 function switchAuthTab(tab) {
   document.getElementById('loginTab').classList.toggle('active', tab === 'login');
@@ -1640,9 +1687,11 @@ document.addEventListener('click', e => {
 });
 function showMsg(el, text, type) { el.textContent = text; el.className = 'form-msg ' + type; }
 
+// ===== HELPERS =====
 function toBanglaNum(n) { return String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]); }
 function discount(p) { return Math.round((p.oldPrice - p.price) / p.oldPrice * 100); }
 
+// ===== PRODUCTS =====
 function renderProducts() {
   const grid = document.getElementById('productsGrid');
   const search = document.getElementById('searchInput').value.toLowerCase();
@@ -1716,6 +1765,7 @@ function toggleWishlist(id, e) {
   if (p) showToast((wishlist.has(id)?'❤️ ':'🤍 ')+(currentLang==='bn'?(wishlist.has(id)?'উইশলিস্টে যোগ হয়েছে':'উইশলিস্ট থেকে সরানো হয়েছে'):(wishlist.has(id)?'Added to wishlist':'Removed from wishlist')));
 }
 
+// ===== QUICK VIEW =====
 function openQuickView(id) {
   const p = mangoProducts.find(x=>x.id===id);
   if (!p) return;
@@ -1765,6 +1815,7 @@ function addToCartQv(id) {
   showToast('🛒 '+(currentLang==='bn'?p.nameBn+' কার্টে যোগ হয়েছে!':p.nameEn+' added to cart!'),'success');
 }
 
+// ===== CART =====
 function addToCart(id) {
   const product = mangoProducts.find(p=>p.id===id);
   if (!product) return;
@@ -1836,6 +1887,7 @@ function changeQty(id, delta) {
 function removeFromCart(id) { cart = cart.filter(c=>c.id!==id); saveCart(); updateCartCount(); renderCart(); renderProducts(); updateStickyBar(); }
 function openOrders() { document.getElementById('userDropdown').classList.remove('open'); showToast(currentLang==='bn'?'📦 পূর্ববর্তী কোনো অর্ডার নেই।':'📦 No previous orders.'); }
 
+// ===== NEWSLETTER =====
 function subscribeNewsletter() {
   const email = document.getElementById('nlEmail').value.trim();
   if (!email || !email.includes('@')) { showToast(currentLang==='bn'?'সঠিক ইমেইল দিন।':'Enter a valid email.','error'); return; }
@@ -1843,6 +1895,7 @@ function subscribeNewsletter() {
   showToast('✅ '+(currentLang==='bn'?'সাবস্ক্রাইব সফল! ধন্যবাদ।':'Subscribed! Thank you.'),'success');
 }
 
+// ===== CHECKOUT =====
 function openCheckout() {
   if (!currentUser) { closeModal('cartModal'); openAuth('login'); showToast(currentLang==='bn'?'অর্ডার করতে লগইন করুন।':'Please login to order.'); return; }
   closeModal('cartModal'); checkoutStep=1; renderCheckout();
@@ -1904,6 +1957,7 @@ function checkoutNext() {
 }
 function finishCheckout() { closeModal('checkoutModal'); showToast('🥭 '+(currentLang==='bn'?'অর্ডার সম্পন্ন! ধন্যবাদ।':'Order complete! Thank you.'),'success'); }
 
+// ===== TESTIMONIALS =====
 function renderTestimonials() {
   const isBangla=currentLang==='bn';
   document.getElementById('testimonialsGrid').innerHTML=testimonials.map(t=>`
@@ -1914,6 +1968,7 @@ function renderTestimonials() {
     </div>`).join('');
 }
 
+// ===== CONTACT =====
 function sendContact() {
   const name=document.getElementById('contactName').value.trim();
   const msg=document.getElementById('contactMsg').value.trim();
@@ -1924,13 +1979,31 @@ function sendContact() {
   showToast('✅ '+(currentLang==='bn'?'বার্তা পাঠানো হয়েছে!':'Message sent!'),'success');
 }
 
+// ===== MODAL HELPERS =====
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 function handleOverlayClick(event,modalId) { if (event.target===document.getElementById(modalId)) closeModal(modalId); }
 
+// ===== TOAST =====
 function showToast(msg, type='') {
   const container=document.getElementById('toastContainer');
   const toast=document.createElement('div');
   toast.className='toast '+type;
   toast.textContent=msg;
   container.appendChild(toast);
-  setTimeout(()=>{ toast.style.transition='all 0.3s ease'; toast.
+  setTimeout(()=>{
+    toast.style.transition='all 0.3s ease';
+    toast.style.opacity='0';
+    toast.style.transform='translateX(100%)';
+    setTimeout(()=>toast.remove(),300);
+  },3000);
+}
+
+// ===== INIT =====
+updateAuthUI();
+updateCartCount();
+updateStickyBar();
+renderProducts();
+renderTestimonials();
+</script>
+</body>
+</html>
