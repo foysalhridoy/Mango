@@ -67,54 +67,65 @@ body {
   background: var(--navbar-bg);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--navbar-border);
-  padding: 0 5%;
+  padding: 0 4%;
   padding-top: max(0px, env(safe-area-inset-top));
-  height: calc(70px + env(safe-area-inset-top, 0px));
+  min-height: calc(64px + env(safe-area-inset-top, 0px));
   display: flex; align-items: center; justify-content: space-between;
   transition: all 0.3s ease;
   box-shadow: 0 2px 20px rgba(255,140,0,0.08);
+  gap: 8px;
 }
 .navbar.scrolled { box-shadow: var(--shadow-sm); }
 .nav-logo {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 8px;
   text-decoration: none;
   font-family: 'Noto Serif Bengali', serif;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 800;
   background: linear-gradient(135deg, var(--mango-green), var(--mango-deep));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  flex-shrink: 0;
 }
-.logo-icon { font-size: 1.8rem; animation: float 3s ease-in-out infinite; }
+.logo-icon { font-size: 1.6rem; animation: float 3s ease-in-out infinite; flex-shrink: 0; }
 @keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)} }
 
-.nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+.nav-links { display: flex; align-items: center; gap: 4px; list-style: none; flex-shrink: 0; }
 .nav-links a {
   text-decoration: none; color: var(--text-secondary);
-  font-size: 0.95rem; font-weight: 500;
-  padding: 8px 14px; border-radius: var(--radius-sm);
-  transition: all 0.2s ease;
+  font-size: 0.9rem; font-weight: 500;
+  padding: 7px 11px; border-radius: var(--radius-sm);
+  transition: all 0.2s ease; white-space: nowrap;
 }
 .nav-links a:hover { background: rgba(255,184,0,0.15); color: var(--mango-deep); }
 
-.nav-actions { display: flex; align-items: center; gap: 10px; }
+/* ===== NAVBAR ACTIONS — FIXED RESPONSIVE ===== */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  min-width: 0;
+}
 
 .lang-toggle {
   background: linear-gradient(135deg, var(--mango-green), #1a5e00);
   color: white; border: none;
-  padding: 7px 14px; border-radius: 20px;
-  font-size: 0.82rem; font-family: 'Noto Sans Bengali', sans-serif;
+  padding: 6px 12px; border-radius: 20px;
+  font-size: 0.8rem; font-family: 'Noto Sans Bengali', sans-serif;
   cursor: pointer; font-weight: 600;
   transition: all 0.2s ease;
+  white-space: nowrap; flex-shrink: 0;
 }
 .lang-toggle:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(45,139,0,0.3); }
 
 .cart-btn {
   position: relative;
   background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep));
-  border: none; padding: 8px 14px; border-radius: 20px;
-  cursor: pointer; font-size: 1.1rem; transition: all 0.2s ease;
+  border: none; padding: 7px 12px; border-radius: 20px;
+  cursor: pointer; font-size: 1rem; transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 .cart-btn:hover { transform: scale(1.05); box-shadow: 0 4px 14px rgba(255,140,0,0.4); }
 .cart-count {
@@ -129,9 +140,10 @@ body {
 
 .auth-btn {
   background: transparent; border: 2px solid var(--mango-deep);
-  color: var(--mango-deep); padding: 7px 16px; border-radius: 20px;
-  font-size: 0.88rem; font-family: 'Noto Sans Bengali', sans-serif;
+  color: var(--mango-deep); padding: 6px 13px; border-radius: 20px;
+  font-size: 0.85rem; font-family: 'Noto Sans Bengali', sans-serif;
   cursor: pointer; font-weight: 600; transition: all 0.2s ease;
+  white-space: nowrap; flex-shrink: 0;
 }
 .auth-btn:hover { background: var(--mango-deep); color: white; }
 .auth-btn.primary {
@@ -140,14 +152,14 @@ body {
 }
 .auth-btn.primary:hover { box-shadow: 0 4px 14px rgba(255,107,26,0.4); transform: translateY(-1px); }
 
-.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-.hamburger span { display: block; width: 24px; height: 2px; background: var(--mango-deep); border-radius: 2px; transition: all 0.3s ease; }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; flex-shrink: 0; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--mango-deep); border-radius: 2px; transition: all 0.3s ease; }
 .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
 .mobile-menu {
-  display: none; position: fixed; top: calc(70px + env(safe-area-inset-top, 0px)); left: 0; right: 0;
+  display: none; position: fixed; top: calc(64px + env(safe-area-inset-top, 0px)); left: 0; right: 0;
   background: var(--navbar-bg); backdrop-filter: blur(20px);
   border-bottom: 2px solid var(--navbar-border);
   padding: 20px 5%; z-index: 999;
@@ -157,6 +169,31 @@ body {
 .mobile-menu.open { display: flex; }
 .mobile-menu a { text-decoration: none; color: var(--text-secondary); font-size: 1rem; padding: 12px 16px; border-radius: var(--radius-sm); font-weight: 500; transition: all 0.2s ease; }
 .mobile-menu a:hover { background: rgba(255,184,0,0.15); color: var(--mango-deep); }
+
+/* Responsive navbar breakpoints */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* On medium-small screens, hide auth text labels */
+@media (max-width: 520px) {
+  .navbar { padding: 0 3%; gap: 5px; }
+  .nav-logo { font-size: 1.2rem; gap: 5px; }
+  .logo-icon { font-size: 1.3rem; }
+  .nav-actions { gap: 4px; }
+  .auth-btn { padding: 6px 10px; font-size: 0.78rem; }
+  .lang-toggle { padding: 6px 10px; font-size: 0.75rem; }
+  .cart-btn { padding: 6px 10px; font-size: 0.9rem; }
+}
+
+/* Very small screens — hide sign-up text or both auth buttons */
+@media (max-width: 400px) {
+  .navbar { padding: 0 3%; gap: 4px; }
+  .nav-logo span:last-child { display: none; }
+  #authBtns .auth-btn:not(.primary) { display: none; }
+  .auth-btn.primary { padding: 6px 10px; font-size: 0.75rem; }
+}
 
 /* ===== ANNOUNCEMENT BAR ===== */
 .announcement-bar {
@@ -176,7 +213,7 @@ body {
   flex-wrap: wrap;
   position: relative;
   z-index: 999;
-  margin-top: calc(70px + env(safe-area-inset-top, 0px));
+  margin-top: calc(64px + env(safe-area-inset-top, 0px));
 }
 @keyframes shimmerBg { 0%{background-position:0% 0} 100%{background-position:200% 0} }
 .ann-code { background: rgba(255,200,80,0.2); border: 1px solid rgba(255,200,80,0.4); padding: 2px 10px; border-radius: 12px; color: #FFCA28; font-weight: 800; letter-spacing: 1px; }
@@ -332,7 +369,6 @@ section { padding: 80px 5%; }
 .filter-btn:hover { border-color: var(--mango-yellow); color: var(--mango-deep); background: rgba(255,184,0,0.08); }
 .filter-btn.active { background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep)); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(255,140,0,0.3); }
 
-/* Sort dropdown */
 .sort-wrap { display: flex; align-items: center; gap: 8px; }
 .sort-wrap label { font-size: 0.82rem; color: var(--text-light); white-space: nowrap; }
 .sort-select {
@@ -380,7 +416,6 @@ section { padding: 80px 5%; }
 .wishlist-btn:hover { transform: scale(1.15); }
 .wishlist-btn.active { color: #e74c3c; }
 
-/* Quick view overlay */
 .quick-view-overlay {
   position: absolute; bottom: 0; left: 0; right: 0;
   background: rgba(0,0,0,0.6); color: white;
@@ -660,7 +695,6 @@ footer::after {
 .empty-cart-icon { font-size: 3.5rem; margin-bottom: 12px; }
 .empty-cart-text { font-size: 1rem; font-family: 'Noto Serif Bengali', serif; }
 
-/* Coupon input */
 .coupon-row { display: flex; gap: 8px; margin-bottom: 12px; }
 .coupon-input { flex: 1; padding: 10px 14px; border: 2px solid rgba(255,184,0,0.25); border-radius: 20px; font-size: 0.88rem; font-family: 'Noto Sans Bengali',sans-serif; color: var(--text-primary); background: var(--input-bg); outline: none; letter-spacing: 1px; text-transform: uppercase; }
 .coupon-input:focus { border-color: var(--mango-yellow); }
@@ -693,7 +727,7 @@ footer::after {
 
 /* ===== USER MENU ===== */
 .user-menu-wrap { position: relative; }
-.user-avatar-btn { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep)); border: none; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: white; font-family: 'Noto Serif Bengali', serif; transition: all 0.2s ease; }
+.user-avatar-btn { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--mango-yellow), var(--mango-deep)); border: none; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: white; font-family: 'Noto Serif Bengali', serif; transition: all 0.2s ease; flex-shrink: 0; }
 .user-avatar-btn:hover { box-shadow: 0 4px 12px rgba(255,140,0,0.4); transform: scale(1.06); }
 .user-dropdown { display: none; position: absolute; top: calc(100% + 10px); right: 0; background: var(--modal-bg); border-radius: var(--radius); box-shadow: var(--shadow-md); padding: 8px; min-width: 160px; border: 1px solid var(--navbar-border); z-index: 100; }
 .user-dropdown.open { display: block; animation: slideUp 0.2s ease; }
@@ -717,20 +751,82 @@ footer::after {
 .sticky-cart-info { font-family: 'Noto Serif Bengali', serif; font-weight: 700; font-size: 1rem; color: var(--text-primary); }
 .sticky-cart-sub { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
 
-/* ===== BACK TO TOP — MANGO SHAPE ===== */
+/* ===== BACK TO TOP — CUTE MANGO CHARACTER ===== */
 .back-top {
-  position: fixed; bottom: 80px; right: 24px; z-index: 800;
-  width: 54px; height: 60px;
+  position: fixed; bottom: 84px; right: 20px; z-index: 800;
+  width: 62px; height: 72px;
   background: none;
   border: none; cursor: pointer;
   display: none; align-items: center; justify-content: center;
-  transition: all 0.25s ease;
-  filter: drop-shadow(0 6px 16px rgba(255,140,0,0.45));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   padding: 0;
 }
 .back-top.visible { display: flex; }
-.back-top:hover { transform: translateY(-5px) scale(1.12); filter: drop-shadow(0 10px 22px rgba(255,140,0,0.65)); }
-.back-top svg { width: 54px; height: 60px; }
+
+/* Idle gentle float */
+@keyframes mangoFloat {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+/* Glow pulse */
+@keyframes mangoGlow {
+  0%, 100% { filter: drop-shadow(0 6px 14px rgba(255,140,0,0.45)) drop-shadow(0 0 6px rgba(255,184,0,0.2)); }
+  50% { filter: drop-shadow(0 10px 22px rgba(255,140,0,0.7)) drop-shadow(0 0 14px rgba(255,184,0,0.45)); }
+}
+/* Eye blink */
+@keyframes eyeBlink {
+  0%, 94%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+/* Cheek twinkle */
+@keyframes cheekPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.85; }
+}
+/* Hover bounce */
+.back-top:hover {
+  transform: translateY(-6px) scale(1.14) rotate(3deg);
+}
+/* Sparkle float */
+@keyframes sparkle1 {
+  0% { opacity: 0; transform: translate(0,0) scale(0); }
+  40% { opacity: 1; transform: translate(-8px,-12px) scale(1); }
+  100% { opacity: 0; transform: translate(-12px,-22px) scale(0.5); }
+}
+@keyframes sparkle2 {
+  0% { opacity: 0; transform: translate(0,0) scale(0); }
+  40% { opacity: 1; transform: translate(10px,-10px) scale(1); }
+  100% { opacity: 0; transform: translate(16px,-20px) scale(0.5); }
+}
+
+.back-top svg {
+  width: 62px;
+  height: 72px;
+  animation: mangoFloat 3s ease-in-out infinite, mangoGlow 3s ease-in-out infinite;
+  overflow: visible;
+}
+.back-top:hover svg {
+  animation: mangoGlow 0.6s ease-in-out infinite;
+}
+/* Eye blink applied via CSS to the eye group */
+.mango-eye-left, .mango-eye-right {
+  animation: eyeBlink 4s ease-in-out infinite;
+  transform-origin: center;
+}
+.mango-eye-right { animation-delay: 0.08s; }
+/* Cheek pulse */
+.mango-cheek { animation: cheekPulse 2.5s ease-in-out infinite; }
+
+/* Sparkle elements shown on hover */
+.mango-sparkle-1, .mango-sparkle-2 {
+  opacity: 0;
+}
+.back-top:hover .mango-sparkle-1 {
+  animation: sparkle1 0.9s ease-out infinite;
+}
+.back-top:hover .mango-sparkle-2 {
+  animation: sparkle2 0.9s 0.15s ease-out infinite;
+}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
@@ -740,8 +836,15 @@ footer::after {
 }
 
 @media (max-width: 900px) {
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-visual { display: none; }
+  .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  .qv-grid { grid-template-columns: 1fr; }
+  .qv-img { height: 180px; }
+}
+
+@media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; gap: 40px; }
   .hero { text-align: center; padding: 50px 5% 50px; }
   .hero-desc { margin: 0 auto 32px; }
@@ -750,12 +853,6 @@ footer::after {
   .hero-visual { order: -1; }
   .hero-mango-blob { width: 260px; height: 260px; }
   .f-badge { display: none; }
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .about-visual { display: none; }
-  .contact-grid { grid-template-columns: 1fr; gap: 30px; }
-  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-  .qv-grid { grid-template-columns: 1fr; }
-  .qv-img { height: 180px; }
 }
 
 @media (max-width: 768px) {
@@ -767,8 +864,6 @@ footer::after {
 }
 
 @media (max-width: 600px) {
-  .nav-actions { gap: 6px; }
-  .auth-btn span { display: none; }
   section { padding: 50px 4%; }
   .search-filter { padding: 16px; gap: 12px; }
   .modal { padding: 22px; }
@@ -788,7 +883,8 @@ footer::after {
   .toast-container { bottom: 70px; right: 12px; left: 12px; }
   .toast { max-width: 100%; }
   .sticky-cart-bar { padding: 10px 4%; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
-  .back-top { right: 12px; bottom: 72px; }
+  .back-top { right: 10px; bottom: 76px; width: 54px; height: 64px; }
+  .back-top svg { width: 54px; height: 64px; }
 }
 
 @media (max-width: 380px) {
@@ -822,7 +918,7 @@ footer::after {
     <button class="cart-btn" onclick="openCart()" title="Cart">
       🛒 <span class="cart-count" id="cartCount">0</span>
     </button>
-    <div id="authBtns" style="display:flex;gap:8px;align-items:center;">
+    <div id="authBtns" style="display:flex;gap:6px;align-items:center;">
       <button class="auth-btn" onclick="openAuth('login')" data-bn="লগইন" data-en="Login">লগইন</button>
       <button class="auth-btn primary" onclick="openAuth('signup')" data-bn="সাইনআপ" data-en="Sign Up">সাইনআপ</button>
     </div>
@@ -1248,30 +1344,111 @@ footer::after {
   </button>
 </div>
 
-<!-- BACK TO TOP — MANGO SHAPED BUTTON -->
+<!-- BACK TO TOP — CUTE MANGO CHARACTER BUTTON -->
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="উপরে যান">
-  <svg viewBox="0 0 100 115" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="-8 -8 116 130" xmlns="http://www.w3.org/2000/svg" overflow="visible">
     <defs>
-      <radialGradient id="mg" cx="38%" cy="32%" r="68%">
-        <stop offset="0%" stop-color="#FFE082"/>
-        <stop offset="48%" stop-color="#FFB800"/>
-        <stop offset="100%" stop-color="#FF6B1A"/>
+      <!-- Main mango gradient: golden top, warm orange base -->
+      <radialGradient id="mgMain" cx="38%" cy="30%" r="65%">
+        <stop offset="0%" stop-color="#FFF0A0"/>
+        <stop offset="35%" stop-color="#FFD740"/>
+        <stop offset="70%" stop-color="#FFA000"/>
+        <stop offset="100%" stop-color="#FF6D00"/>
       </radialGradient>
-      <radialGradient id="ms" cx="30%" cy="22%" r="42%">
-        <stop offset="0%" stop-color="rgba(255,255,255,0.42)"/>
+      <!-- Shine highlight -->
+      <radialGradient id="mgShine" cx="28%" cy="20%" r="45%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.55)"/>
         <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
       </radialGradient>
+      <!-- Shadow at bottom -->
+      <radialGradient id="mgShadow" cx="50%" cy="95%" r="50%">
+        <stop offset="0%" stop-color="rgba(150,50,0,0.22)"/>
+        <stop offset="100%" stop-color="rgba(150,50,0,0)"/>
+      </radialGradient>
+      <!-- Rosy cheek gradient -->
+      <radialGradient id="cheekL" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#FF8A65" stop-opacity="0.65"/>
+        <stop offset="100%" stop-color="#FF8A65" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="cheekR" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#FF8A65" stop-opacity="0.65"/>
+        <stop offset="100%" stop-color="#FF8A65" stop-opacity="0"/>
+      </radialGradient>
+      <!-- Drop shadow filter -->
+      <filter id="softShadow" x="-20%" y="-10%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#FF8C00" flood-opacity="0.38"/>
+      </filter>
+      <filter id="glowShadow" x="-30%" y="-20%" width="160%" height="160%">
+        <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#FFB800" flood-opacity="0.3"/>
+        <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#FF8C00" flood-opacity="0.45"/>
+      </filter>
     </defs>
-    <!-- Mango body -->
-    <path d="M50 105 C18 96 6 72 8 50 C10 26 26 10 50 8 C74 10 90 26 92 50 C94 72 82 96 50 105 Z" fill="url(#mg)"/>
-    <!-- Shine highlight -->
-    <ellipse cx="37" cy="34" rx="17" ry="20" fill="url(#ms)"/>
-    <!-- Stem -->
-    <path d="M50 8 C51 2 56 -1 61 1 C64 3 63 7 59 8 C56 9 53 9 50 8 Z" fill="#2D8B00"/>
-    <!-- Leaf -->
-    <path d="M54 7 C60 1 74 -1 77 6 C70 11 61 10 54 7 Z" fill="#3cb800"/>
-    <!-- Up arrow -->
-    <path d="M50 76 L50 40 M50 40 L39 53 M50 40 L61 53" stroke="rgba(255,255,255,0.92)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- === MANGO BODY === -->
+    <g filter="url(#glowShadow)">
+      <!-- Main body shape — organic teardrop -->
+      <path d="M50 108 C20 100 4 76 5 52 C6 28 22 10 50 8 C78 10 94 28 95 52 C96 76 80 100 50 108 Z" fill="url(#mgMain)"/>
+      <!-- Inner shadow at base -->
+      <path d="M50 108 C20 100 4 76 5 52 C6 28 22 10 50 8 C78 10 94 28 95 52 C96 76 80 100 50 108 Z" fill="url(#mgShadow)"/>
+      <!-- Shine highlight overlay -->
+      <ellipse cx="36" cy="36" rx="20" ry="26" fill="url(#mgShine)"/>
+    </g>
+
+    <!-- === STEM === -->
+    <path d="M50 8 C50 3 54 -2 60 -3 C65 -4 67 0 64 3 C61 6 56 7 50 8 Z"
+          fill="#33691E" stroke="#2E7D32" stroke-width="0.5"/>
+
+    <!-- === LEAVES === -->
+    <!-- Left leaf -->
+    <path d="M52 5 C46 -4 30 -8 24 -2 C22 0 24 4 28 5 C36 7 46 5 52 5 Z"
+          fill="#558B2F"/>
+    <!-- Right leaf — bigger, curved -->
+    <path d="M54 4 C62 -6 80 -8 84 -2 C86 0 83 5 78 5 C70 6 62 5 54 4 Z"
+          fill="#689F38"/>
+    <!-- Leaf vein detail -->
+    <path d="M52 5 C44 0 32 -3 26 -1" stroke="#33691E" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+    <path d="M54 4 C64 -1 76 -4 82 -2" stroke="#33691E" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+
+    <!-- === BLUSH CHEEKS === -->
+    <ellipse class="mango-cheek" cx="27" cy="65" rx="11" ry="8" fill="url(#cheekL)"/>
+    <ellipse class="mango-cheek" cx="73" cy="65" rx="11" ry="8" fill="url(#cheekR)"/>
+
+    <!-- === CUTE FACE === -->
+    <!-- Left eye (rounded rectangle shape) -->
+    <g class="mango-eye-left" transform="translate(35, 52)">
+      <rect x="-5" y="-7" width="10" height="13" rx="5" fill="#3E2723"/>
+      <!-- Eye shine -->
+      <circle cx="-1" cy="-3" r="2.5" fill="white" opacity="0.9"/>
+      <circle cx="2" cy="-5" r="1.2" fill="white" opacity="0.7"/>
+    </g>
+    <!-- Right eye -->
+    <g class="mango-eye-right" transform="translate(65, 52)">
+      <rect x="-5" y="-7" width="10" height="13" rx="5" fill="#3E2723"/>
+      <!-- Eye shine -->
+      <circle cx="-1" cy="-3" r="2.5" fill="white" opacity="0.9"/>
+      <circle cx="2" cy="-5" r="1.2" fill="white" opacity="0.7"/>
+    </g>
+
+    <!-- Smile — gentle UwU curve -->
+    <path d="M39 74 Q50 83 61 74" stroke="#3E2723" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <!-- Tiny tongue peeking -->
+    <ellipse cx="50" cy="80" rx="5" ry="3.5" fill="#EF9A9A" opacity="0.85"/>
+
+    <!-- === UP ARROW — clean, inside the mango === -->
+    <line x1="50" y1="90" x2="50" y2="44" stroke="rgba(255,255,255,0.88)" stroke-width="5" stroke-linecap="round"/>
+    <polyline points="38,57 50,44 62,57" stroke="rgba(255,255,255,0.88)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- === SPARKLES (shown on hover via CSS) === -->
+    <!-- Left sparkle ✦ -->
+    <g class="mango-sparkle-1" transform="translate(10, 30)">
+      <path d="M0,-8 L1.5,-1.5 L8,0 L1.5,1.5 L0,8 L-1.5,1.5 L-8,0 L-1.5,-1.5 Z"
+            fill="#FFD740" opacity="0.9"/>
+    </g>
+    <!-- Right sparkle ✦ smaller -->
+    <g class="mango-sparkle-2" transform="translate(90, 20)">
+      <path d="M0,-5 L1,−1 L5,0 L1,1 L0,5 L−1,1 L−5,0 L−1,−1 Z"
+            fill="#FFB800" opacity="0.85"/>
+    </g>
   </svg>
 </button>
 
