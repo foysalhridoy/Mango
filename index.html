@@ -197,6 +197,7 @@ body {
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
+  .lang-toggle { display: none; }
 }
 
 @media (max-width: 520px) {
@@ -988,6 +989,9 @@ footer::after {
   <a href="#about" onclick="closeMenu()" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a>
   <a href="#reviews" onclick="closeMenu()" data-bn="রিভিউ" data-en="Reviews">রিভিউ</a>
   <a href="#contact" onclick="closeMenu()" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a>
+  <div style="border-top:1px solid rgba(255,184,0,0.2);margin-top:8px;padding-top:12px;">
+    <button onclick="toggleLang();closeMenu();" style="background:linear-gradient(135deg,var(--mango-green),#1a5e00);color:white;border:none;padding:10px 20px;border-radius:20px;font-size:0.9rem;font-family:'Noto Sans Bengali',sans-serif;font-weight:600;cursor:pointer;width:100%;display:flex;align-items:center;gap:8px;justify-content:center;" id="mobileLangToggle">🌐 <span data-bn="English এ দেখুন" data-en="বাংলায় দেখুন">English এ দেখুন</span></button>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -1238,7 +1242,7 @@ footer::after {
         </div>
         <div class="contact-item">
           <div class="contact-icon">✉️</div>
-          <div><div class="contact-label" data-bn="ইমেইল" data-en="Email">ইমেইল</div><div class="contact-value">hello@mango.com.bd</div></div>
+          <div><div class="contact-label" data-bn="ইমেইল" data-en="Email">ইমেইল</div><div class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb3beb7b7b49bb6bab5bcb4f5b8b4b6f5b9bf">[email&#160;protected]</a></div></div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">⏰</div>
@@ -1283,10 +1287,29 @@ footer::after {
         বাংলাদেশের সেরা অনলাইন আম বিক্রয় প্ল্যাটফর্ম। রাজশাহী, চাঁপাইনবাবগঞ্জ ও সাতক্ষীরার তাজা আম সরাসরি আপনার দরজায়।
       </p>
       <div class="social-links">
-        <a class="social-link" href="#" title="Facebook">📘</a>
-        <a class="social-link" href="#" title="Instagram">📸</a>
-        <a class="social-link" href="#" title="WhatsApp">💬</a>
-        <a class="social-link" href="#" title="YouTube">▶️</a>
+        <a class="social-link" href="#" title="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="#FFD740" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </a>
+        <a class="social-link" href="#" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="#FFD740" stroke-width="2" fill="none"/>
+            <circle cx="12" cy="12" r="4" stroke="#FFD740" stroke-width="2" fill="none"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="#FFD740"/>
+          </svg>
+        </a>
+        <a class="social-link" href="#" title="WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="#FFD740" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </a>
+        <a class="social-link" href="#" title="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" stroke="#FFD740" stroke-width="2" fill="none"/>
+            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="#FFD740" stroke-width="1.5" fill="#FFD740"/>
+          </svg>
+        </a>
       </div>
     </div>
     <div>
@@ -1454,8 +1477,9 @@ footer::after {
     </g>
     <path d="M39 74 Q50 83 61 74" stroke="#3E2723" stroke-width="2.8" fill="none" stroke-linecap="round"/>
     <ellipse cx="50" cy="80" rx="5" ry="3.5" fill="#EF9A9A" opacity="0.85"/>
-    <line x1="50" y1="90" x2="50" y2="44" stroke="rgba(255,255,255,0.88)" stroke-width="5" stroke-linecap="round"/>
-    <polyline points="38,57 50,44 62,57" stroke="rgba(255,255,255,0.88)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <line x1="50" y1="88" x2="50" y2="48" stroke="rgba(255,255,255,0)" stroke-width="0"/>
+    <path d="M32 78 Q50 52 68 78" stroke="rgba(255,255,255,0.92)" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M39 62 Q50 48 61 62" stroke="rgba(255,255,255,0.65)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     <g class="mango-sparkle-1" transform="translate(10, 30)">
       <path d="M0,-8 L1.5,-1.5 L8,0 L1.5,1.5 L0,8 L-1.5,1.5 L-8,0 L-1.5,-1.5 Z" fill="#FFD740" opacity="0.9"/>
     </g>
@@ -1465,7 +1489,7 @@ footer::after {
   </svg>
 </button>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const mangoProducts = [
   { id:1, emoji:'🥭', img:'https://images.pexels.com/photos/2294471/pexels-photo-2294471.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'ফজলি আম', nameEn:'Fazli Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:180, oldPrice:220, unit:'কেজি', unitEn:'kg', rating:4.9, reviews:312, badge:'hot', category:'rajshahi', descBn:'বড় আকারের সুমিষ্টি আম। রাজশাহীর বিখ্যাত জাত।', descEn:'Large and very sweet mango, famous variety from Rajshahi.' },
   { id:2, emoji:'🟡', img:'https://images.pexels.com/photos/4023132/pexels-photo-4023132.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'ল্যাংড়া আম', nameEn:'Langra Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:220, oldPrice:280, unit:'কেজি', unitEn:'kg', rating:4.8, reviews:256, badge:'premium', category:'chapai', descBn:'রসালো ও সুগন্ধি আম। চাঁপাইনবাবগঞ্জের গর্ব।', descEn:'Juicy and aromatic mango. The pride of Chapainawabganj.' },
@@ -1500,6 +1524,11 @@ function toggleLang() {
   currentLang = currentLang === 'bn' ? 'en' : 'bn';
   document.documentElement.lang = currentLang;
   document.getElementById('langToggle').textContent = currentLang === 'bn' ? 'EN' : 'বাং';
+  const mobileBtn = document.getElementById('mobileLangToggle');
+  if (mobileBtn) {
+    const span = mobileBtn.querySelector('span');
+    if (span) span.textContent = currentLang === 'bn' ? 'English এ দেখুন' : 'বাংলায় দেখুন';
+  }
   applyLang();
 }
 function applyLang() {
@@ -1536,9 +1565,12 @@ function closeMenu() {
 }
 
 function updateTimer() {
-  const end = new Date('2026-09-30T23:59:59');
+  if (!window._timerEnd) {
+    const now = new Date();
+    window._timerEnd = new Date(now.getTime() + (10 * 86400000) + (5 * 3600000));
+  }
   const now = new Date();
-  let diff = Math.max(0, end - now);
+  let diff = Math.max(0, window._timerEnd - now);
   const days = Math.floor(diff / 86400000); diff %= 86400000;
   const hours = Math.floor(diff / 3600000); diff %= 3600000;
   const mins = Math.floor(diff / 60000); diff %= 60000;
@@ -1901,14 +1933,4 @@ function showToast(msg, type='') {
   toast.className='toast '+type;
   toast.textContent=msg;
   container.appendChild(toast);
-  setTimeout(()=>{ toast.style.transition='all 0.3s ease'; toast.style.opacity='0'; toast.style.transform='translateX(100%)'; setTimeout(()=>toast.remove(),300); },3000);
-}
-
-updateAuthUI();
-renderProducts();
-renderTestimonials();
-updateCartCount();
-updateStickyBar();
-</script>
-</body>
-</html>
+  setTimeout(()=>{ toast.style.transition='all 0.3s ease'; toast.
