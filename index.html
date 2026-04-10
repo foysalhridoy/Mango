@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Mango - আমের রাজ্য</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='mg' x1='30%25' y1='10%25' x2='70%25' y2='90%25'%3E%3Cstop offset='0%25' stop-color='%23FFD740'/%3E%3Cstop offset='55%25' stop-color='%23FFA000'/%3E%3Cstop offset='100%25' stop-color='%23E65100'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 92 C28 84 12 65 13 46 C14 27 28 14 50 13 C72 14 86 27 87 46 C88 65 72 84 50 92Z' fill='url(%23mg)'/%3E%3Cellipse cx='38' cy='36' rx='11' ry='15' fill='rgba(255,255,255,0.2)'/%3E%3Cpath d='M50 13 C50 8 54 3 59 2 C64 1 65 6 62 9 C58 11 54 12 50 13Z' fill='%2333691E'/%3E%3Cpath d='M52 12 C46 4 30 1 22 7 C19 10 22 15 27 15 C36 15 45 13 52 12Z' fill='%23558B2F'/%3E%3Cpath d='M54 11 C62 3 80 1 86 7 C89 10 85 15 79 15 C70 14 61 12 54 11Z' fill='%23689F38'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
 <style>
@@ -76,20 +77,43 @@ body {
   gap: 8px;
 }
 .navbar.scrolled { box-shadow: var(--shadow-sm); }
+
+/* ===== LOGO ===== */
 .nav-logo {
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 10px;
   text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo-svg {
+  width: 38px; height: 38px;
+  flex-shrink: 0;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 3px 6px rgba(255,140,0,0.35));
+}
+.nav-logo-text {
+  display: flex; flex-direction: column; line-height: 1.1;
+}
+.nav-logo-name {
   font-family: 'Noto Serif Bengali', serif;
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--mango-green), var(--mango-deep));
+  background: linear-gradient(135deg, #2D8B00, #FF8C00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  flex-shrink: 0;
+  letter-spacing: -0.3px;
 }
-.logo-icon { font-size: 1.6rem; animation: float 3s ease-in-out infinite; flex-shrink: 0; }
-@keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)} }
+.nav-logo-tagline {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--mango-deep);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-top: 1px;
+}
+
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
 
 .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; flex-shrink: 0; }
 .nav-links a {
@@ -100,7 +124,7 @@ body {
 }
 .nav-links a:hover { background: rgba(255,184,0,0.15); color: var(--mango-deep); }
 
-/* ===== NAVBAR ACTIONS — FIXED RESPONSIVE ===== */
+/* ===== NAVBAR ACTIONS ===== */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -170,27 +194,25 @@ body {
 .mobile-menu a { text-decoration: none; color: var(--text-secondary); font-size: 1rem; padding: 12px 16px; border-radius: var(--radius-sm); font-weight: 500; transition: all 0.2s ease; }
 .mobile-menu a:hover { background: rgba(255,184,0,0.15); color: var(--mango-deep); }
 
-/* Responsive navbar breakpoints */
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
 }
 
-/* On medium-small screens, hide auth text labels */
 @media (max-width: 520px) {
   .navbar { padding: 0 3%; gap: 5px; }
-  .nav-logo { font-size: 1.2rem; gap: 5px; }
-  .logo-icon { font-size: 1.3rem; }
+  .nav-logo-name { font-size: 1.2rem; }
+  .nav-logo-tagline { display: none; }
+  .nav-logo-svg { width: 32px; height: 32px; }
   .nav-actions { gap: 4px; }
   .auth-btn { padding: 6px 10px; font-size: 0.78rem; }
   .lang-toggle { padding: 6px 10px; font-size: 0.75rem; }
   .cart-btn { padding: 6px 10px; font-size: 0.9rem; }
 }
 
-/* Very small screens — hide sign-up text or both auth buttons */
 @media (max-width: 400px) {
   .navbar { padding: 0 3%; gap: 4px; }
-  .nav-logo span:last-child { display: none; }
+  .nav-logo-tagline { display: none; }
   #authBtns .auth-btn:not(.primary) { display: none; }
   .auth-btn.primary { padding: 6px 10px; font-size: 0.75rem; }
 }
@@ -751,7 +773,7 @@ footer::after {
 .sticky-cart-info { font-family: 'Noto Serif Bengali', serif; font-weight: 700; font-size: 1rem; color: var(--text-primary); }
 .sticky-cart-sub { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
 
-/* ===== BACK TO TOP — CUTE MANGO CHARACTER ===== */
+/* ===== BACK TO TOP ===== */
 .back-top {
   position: fixed; bottom: 84px; right: 20px; z-index: 800;
   width: 62px; height: 72px;
@@ -763,31 +785,25 @@ footer::after {
 }
 .back-top.visible { display: flex; }
 
-/* Idle gentle float */
 @keyframes mangoFloat {
   0%, 100% { transform: translateY(0) rotate(-1deg); }
   50% { transform: translateY(-6px) rotate(1deg); }
 }
-/* Glow pulse */
 @keyframes mangoGlow {
   0%, 100% { filter: drop-shadow(0 6px 14px rgba(255,140,0,0.45)) drop-shadow(0 0 6px rgba(255,184,0,0.2)); }
   50% { filter: drop-shadow(0 10px 22px rgba(255,140,0,0.7)) drop-shadow(0 0 14px rgba(255,184,0,0.45)); }
 }
-/* Eye blink */
 @keyframes eyeBlink {
   0%, 94%, 100% { transform: scaleY(1); }
   96% { transform: scaleY(0.1); }
 }
-/* Cheek twinkle */
 @keyframes cheekPulse {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 0.85; }
 }
-/* Hover bounce */
 .back-top:hover {
   transform: translateY(-6px) scale(1.14) rotate(3deg);
 }
-/* Sparkle float */
 @keyframes sparkle1 {
   0% { opacity: 0; transform: translate(0,0) scale(0); }
   40% { opacity: 1; transform: translate(-8px,-12px) scale(1); }
@@ -808,25 +824,15 @@ footer::after {
 .back-top:hover svg {
   animation: mangoGlow 0.6s ease-in-out infinite;
 }
-/* Eye blink applied via CSS to the eye group */
 .mango-eye-left, .mango-eye-right {
   animation: eyeBlink 4s ease-in-out infinite;
   transform-origin: center;
 }
 .mango-eye-right { animation-delay: 0.08s; }
-/* Cheek pulse */
 .mango-cheek { animation: cheekPulse 2.5s ease-in-out infinite; }
-
-/* Sparkle elements shown on hover */
-.mango-sparkle-1, .mango-sparkle-2 {
-  opacity: 0;
-}
-.back-top:hover .mango-sparkle-1 {
-  animation: sparkle1 0.9s ease-out infinite;
-}
-.back-top:hover .mango-sparkle-2 {
-  animation: sparkle2 0.9s 0.15s ease-out infinite;
-}
+.mango-sparkle-1, .mango-sparkle-2 { opacity: 0; }
+.back-top:hover .mango-sparkle-1 { animation: sparkle1 0.9s ease-out infinite; }
+.back-top:hover .mango-sparkle-2 { animation: sparkle2 0.9s 0.15s ease-out infinite; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
@@ -842,9 +848,6 @@ footer::after {
   .footer-grid { grid-template-columns: 1fr; gap: 30px; }
   .qv-grid { grid-template-columns: 1fr; }
   .qv-img { height: 180px; }
-}
-
-@media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; gap: 40px; }
   .hero { text-align: center; padding: 50px 5% 50px; }
   .hero-desc { margin: 0 auto 32px; }
@@ -903,9 +906,42 @@ footer::after {
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <a href="#" class="nav-logo">
-    <span class="logo-icon">🥭</span>
-    <span data-bn="Mango" data-en="Mango">Mango</span>
+    <svg class="nav-logo-svg" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="nlMg" x1="30%" y1="10%" x2="70%" y2="90%">
+          <stop offset="0%" stop-color="#FFD740"/>
+          <stop offset="55%" stop-color="#FFA000"/>
+          <stop offset="100%" stop-color="#E65100"/>
+        </linearGradient>
+        <linearGradient id="nlLeafL" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#7CB342"/>
+          <stop offset="100%" stop-color="#33691E"/>
+        </linearGradient>
+        <linearGradient id="nlLeafR" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8BC34A"/>
+          <stop offset="100%" stop-color="#558B2F"/>
+        </linearGradient>
+      </defs>
+      <!-- Mango body -->
+      <path d="M50 105 C24 96 7 74 8 50 C9 28 26 12 50 11 C74 12 91 28 92 50 C93 74 76 96 50 105Z" fill="url(#nlMg)"/>
+      <!-- Shine -->
+      <ellipse cx="36" cy="38" rx="13" ry="19" fill="rgba(255,255,255,0.2)"/>
+      <!-- Stem -->
+      <path d="M50 11 C50 5 55 0 61 -1 C66 -2 67 4 63 7 C59 9 55 10 50 11Z" fill="#33691E"/>
+      <!-- Left leaf -->
+      <path d="M53 10 C46 1 26 -3 18 4 C15 7 18 13 24 13 C34 14 45 11 53 10Z" fill="url(#nlLeafL)"/>
+      <!-- Right leaf -->
+      <path d="M55 9 C64 0 84 -3 90 4 C93 7 89 13 82 13 C72 13 63 11 55 9Z" fill="url(#nlLeafR)"/>
+      <!-- Leaf veins -->
+      <path d="M53 10 C44 5 30 2 21 5" stroke="#2E7D32" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <path d="M55 9 C66 4 80 1 88 5" stroke="#2E7D32" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name" data-bn="Mango" data-en="Mango">Mango</span>
+      <span class="nav-logo-tagline">আমের রাজ্য</span>
+    </div>
   </a>
+
   <ul class="nav-links">
     <li><a href="#products" data-bn="আমের বাজার" data-en="Products">আমের বাজার</a></li>
     <li><a href="#how" data-bn="কিভাবে কাজ করে" data-en="How It Works">কিভাবে কাজ করে</a></li>
@@ -1225,7 +1261,23 @@ footer::after {
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="footer-logo">🥭 Mango</div>
+      <div class="footer-logo">
+        <svg width="32" height="36" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ftMg" x1="30%" y1="10%" x2="70%" y2="90%">
+              <stop offset="0%" stop-color="#FFD740"/>
+              <stop offset="55%" stop-color="#FFA000"/>
+              <stop offset="100%" stop-color="#E65100"/>
+            </linearGradient>
+          </defs>
+          <path d="M50 105 C24 96 7 74 8 50 C9 28 26 12 50 11 C74 12 91 28 92 50 C93 74 76 96 50 105Z" fill="url(#ftMg)"/>
+          <ellipse cx="36" cy="38" rx="13" ry="19" fill="rgba(255,255,255,0.2)"/>
+          <path d="M50 11 C50 5 55 0 61 -1 C66 -2 67 4 63 7 C59 9 55 10 50 11Z" fill="#33691E"/>
+          <path d="M53 10 C46 1 26 -3 18 4 C15 7 18 13 24 13 C34 14 45 11 53 10Z" fill="#558B2F"/>
+          <path d="M55 9 C64 0 84 -3 90 4 C93 7 89 13 82 13 C72 13 63 11 55 9Z" fill="#689F38"/>
+        </svg>
+        Mango
+      </div>
       <div class="footer-tagline">🌿 <span data-bn="বাগান থেকে দরজা পর্যন্ত" data-en="From Orchard to Doorstep">বাগান থেকে দরজা পর্যন্ত</span></div>
       <p class="footer-desc" data-bn="বাংলাদেশের সেরা অনলাইন আম বিক্রয় প্ল্যাটফর্ম। রাজশাহী, চাঁপাইনবাবগঞ্জ ও সাতক্ষীরার তাজা আম সরাসরি আপনার দরজায়।" data-en="Bangladesh's premier online mango marketplace. Fresh mangoes delivered straight to your door.">
         বাংলাদেশের সেরা অনলাইন আম বিক্রয় প্ল্যাটফর্ম। রাজশাহী, চাঁপাইনবাবগঞ্জ ও সাতক্ষীরার তাজা আম সরাসরি আপনার দরজায়।
@@ -1344,28 +1396,24 @@ footer::after {
   </button>
 </div>
 
-<!-- BACK TO TOP — CUTE MANGO CHARACTER BUTTON -->
+<!-- BACK TO TOP -->
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="উপরে যান">
   <svg viewBox="-8 -8 116 130" xmlns="http://www.w3.org/2000/svg" overflow="visible">
     <defs>
-      <!-- Main mango gradient: golden top, warm orange base -->
       <radialGradient id="mgMain" cx="38%" cy="30%" r="65%">
         <stop offset="0%" stop-color="#FFF0A0"/>
         <stop offset="35%" stop-color="#FFD740"/>
         <stop offset="70%" stop-color="#FFA000"/>
         <stop offset="100%" stop-color="#FF6D00"/>
       </radialGradient>
-      <!-- Shine highlight -->
       <radialGradient id="mgShine" cx="28%" cy="20%" r="45%">
         <stop offset="0%" stop-color="rgba(255,255,255,0.55)"/>
         <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
       </radialGradient>
-      <!-- Shadow at bottom -->
       <radialGradient id="mgShadow" cx="50%" cy="95%" r="50%">
         <stop offset="0%" stop-color="rgba(150,50,0,0.22)"/>
         <stop offset="100%" stop-color="rgba(150,50,0,0)"/>
       </radialGradient>
-      <!-- Rosy cheek gradient -->
       <radialGradient id="cheekL" cx="50%" cy="50%" r="50%">
         <stop offset="0%" stop-color="#FF8A65" stop-opacity="0.65"/>
         <stop offset="100%" stop-color="#FF8A65" stop-opacity="0"/>
@@ -1374,7 +1422,6 @@ footer::after {
         <stop offset="0%" stop-color="#FF8A65" stop-opacity="0.65"/>
         <stop offset="100%" stop-color="#FF8A65" stop-opacity="0"/>
       </radialGradient>
-      <!-- Drop shadow filter -->
       <filter id="softShadow" x="-20%" y="-10%" width="140%" height="140%">
         <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#FF8C00" flood-opacity="0.38"/>
       </filter>
@@ -1383,77 +1430,42 @@ footer::after {
         <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#FF8C00" flood-opacity="0.45"/>
       </filter>
     </defs>
-
-    <!-- === MANGO BODY === -->
     <g filter="url(#glowShadow)">
-      <!-- Main body shape — organic teardrop -->
       <path d="M50 108 C20 100 4 76 5 52 C6 28 22 10 50 8 C78 10 94 28 95 52 C96 76 80 100 50 108 Z" fill="url(#mgMain)"/>
-      <!-- Inner shadow at base -->
       <path d="M50 108 C20 100 4 76 5 52 C6 28 22 10 50 8 C78 10 94 28 95 52 C96 76 80 100 50 108 Z" fill="url(#mgShadow)"/>
-      <!-- Shine highlight overlay -->
       <ellipse cx="36" cy="36" rx="20" ry="26" fill="url(#mgShine)"/>
     </g>
-
-    <!-- === STEM === -->
-    <path d="M50 8 C50 3 54 -2 60 -3 C65 -4 67 0 64 3 C61 6 56 7 50 8 Z"
-          fill="#33691E" stroke="#2E7D32" stroke-width="0.5"/>
-
-    <!-- === LEAVES === -->
-    <!-- Left leaf -->
-    <path d="M52 5 C46 -4 30 -8 24 -2 C22 0 24 4 28 5 C36 7 46 5 52 5 Z"
-          fill="#558B2F"/>
-    <!-- Right leaf — bigger, curved -->
-    <path d="M54 4 C62 -6 80 -8 84 -2 C86 0 83 5 78 5 C70 6 62 5 54 4 Z"
-          fill="#689F38"/>
-    <!-- Leaf vein detail -->
+    <path d="M50 8 C50 3 54 -2 60 -3 C65 -4 67 0 64 3 C61 6 56 7 50 8 Z" fill="#33691E" stroke="#2E7D32" stroke-width="0.5"/>
+    <path d="M52 5 C46 -4 30 -8 24 -2 C22 0 24 4 28 5 C36 7 46 5 52 5 Z" fill="#558B2F"/>
+    <path d="M54 4 C62 -6 80 -8 84 -2 C86 0 83 5 78 5 C70 6 62 5 54 4 Z" fill="#689F38"/>
     <path d="M52 5 C44 0 32 -3 26 -1" stroke="#33691E" stroke-width="0.7" fill="none" stroke-linecap="round"/>
     <path d="M54 4 C64 -1 76 -4 82 -2" stroke="#33691E" stroke-width="0.7" fill="none" stroke-linecap="round"/>
-
-    <!-- === BLUSH CHEEKS === -->
     <ellipse class="mango-cheek" cx="27" cy="65" rx="11" ry="8" fill="url(#cheekL)"/>
     <ellipse class="mango-cheek" cx="73" cy="65" rx="11" ry="8" fill="url(#cheekR)"/>
-
-    <!-- === CUTE FACE === -->
-    <!-- Left eye (rounded rectangle shape) -->
     <g class="mango-eye-left" transform="translate(35, 52)">
       <rect x="-5" y="-7" width="10" height="13" rx="5" fill="#3E2723"/>
-      <!-- Eye shine -->
       <circle cx="-1" cy="-3" r="2.5" fill="white" opacity="0.9"/>
       <circle cx="2" cy="-5" r="1.2" fill="white" opacity="0.7"/>
     </g>
-    <!-- Right eye -->
     <g class="mango-eye-right" transform="translate(65, 52)">
       <rect x="-5" y="-7" width="10" height="13" rx="5" fill="#3E2723"/>
-      <!-- Eye shine -->
       <circle cx="-1" cy="-3" r="2.5" fill="white" opacity="0.9"/>
       <circle cx="2" cy="-5" r="1.2" fill="white" opacity="0.7"/>
     </g>
-
-    <!-- Smile — gentle UwU curve -->
     <path d="M39 74 Q50 83 61 74" stroke="#3E2723" stroke-width="2.8" fill="none" stroke-linecap="round"/>
-    <!-- Tiny tongue peeking -->
     <ellipse cx="50" cy="80" rx="5" ry="3.5" fill="#EF9A9A" opacity="0.85"/>
-
-    <!-- === UP ARROW — clean, inside the mango === -->
     <line x1="50" y1="90" x2="50" y2="44" stroke="rgba(255,255,255,0.88)" stroke-width="5" stroke-linecap="round"/>
     <polyline points="38,57 50,44 62,57" stroke="rgba(255,255,255,0.88)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-
-    <!-- === SPARKLES (shown on hover via CSS) === -->
-    <!-- Left sparkle ✦ -->
     <g class="mango-sparkle-1" transform="translate(10, 30)">
-      <path d="M0,-8 L1.5,-1.5 L8,0 L1.5,1.5 L0,8 L-1.5,1.5 L-8,0 L-1.5,-1.5 Z"
-            fill="#FFD740" opacity="0.9"/>
+      <path d="M0,-8 L1.5,-1.5 L8,0 L1.5,1.5 L0,8 L-1.5,1.5 L-8,0 L-1.5,-1.5 Z" fill="#FFD740" opacity="0.9"/>
     </g>
-    <!-- Right sparkle ✦ smaller -->
     <g class="mango-sparkle-2" transform="translate(90, 20)">
-      <path d="M0,-5 L1,−1 L5,0 L1,1 L0,5 L−1,1 L−5,0 L−1,−1 Z"
-            fill="#FFB800" opacity="0.85"/>
+      <path d="M0,-5 L1,-1 L5,0 L1,1 L0,5 L-1,1 L-5,0 L-1,-1 Z" fill="#FFB800" opacity="0.85"/>
     </g>
   </svg>
 </button>
 
 <script>
-// ===== DATA =====
 const mangoProducts = [
   { id:1, emoji:'🥭', img:'https://images.pexels.com/photos/2294471/pexels-photo-2294471.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'ফজলি আম', nameEn:'Fazli Mango', originBn:'রাজশাহী', originEn:'Rajshahi', price:180, oldPrice:220, unit:'কেজি', unitEn:'kg', rating:4.9, reviews:312, badge:'hot', category:'rajshahi', descBn:'বড় আকারের সুমিষ্টি আম। রাজশাহীর বিখ্যাত জাত।', descEn:'Large and very sweet mango, famous variety from Rajshahi.' },
   { id:2, emoji:'🟡', img:'https://images.pexels.com/photos/4023132/pexels-photo-4023132.jpeg?w=400&h=300&fit=crop&auto=format', nameBn:'ল্যাংড়া আম', nameEn:'Langra Mango', originBn:'চাঁপাইনবাবগঞ্জ', originEn:'Chapainawabganj', price:220, oldPrice:280, unit:'কেজি', unitEn:'kg', rating:4.8, reviews:256, badge:'premium', category:'chapai', descBn:'রসালো ও সুগন্ধি আম। চাঁপাইনবাবগঞ্জের গর্ব।', descEn:'Juicy and aromatic mango. The pride of Chapainawabganj.' },
@@ -1474,7 +1486,6 @@ const testimonials = [
   { nameBn:'তানভীর আহমেদ', nameEn:'Tanvir Ahmed', locBn:'খুলনা', locEn:'Khulna', avatar:'ত', stars:5, textBn:'মিশ্রি ভোগ আম খেয়ে মুখে জল আসে। সাতক্ষীরার এই আম সত্যিই অনন্য।', textEn:"Mishri Bhog mango makes your mouth water. This mango from Satkhira is truly unique." },
 ];
 
-// ===== STATE =====
 let cart = JSON.parse(localStorage.getItem('mangoCart') || '[]');
 let users = JSON.parse(localStorage.getItem('mangoUsers') || '[]');
 let currentUser = JSON.parse(localStorage.getItem('mangoUser') || 'null');
@@ -1485,7 +1496,6 @@ let checkoutStep = 1;
 let qvQty = 1;
 let appliedCoupon = false;
 
-// ===== LANG =====
 function toggleLang() {
   currentLang = currentLang === 'bn' ? 'en' : 'bn';
   document.documentElement.lang = currentLang;
@@ -1505,7 +1515,6 @@ function applyLang() {
   renderCart();
 }
 
-// ===== NAVBAR =====
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   document.getElementById('navbar').classList.toggle('scrolled', scrollY > 30);
@@ -1526,7 +1535,6 @@ function closeMenu() {
   document.getElementById('mobileMenu').classList.remove('open');
 }
 
-// ===== TIMER =====
 function updateTimer() {
   const end = new Date('2026-09-30T23:59:59');
   const now = new Date();
@@ -1544,7 +1552,6 @@ function updateTimer() {
 setInterval(updateTimer, 1000);
 updateTimer();
 
-// ===== AUTH =====
 function openAuth(tab) { document.getElementById('authModal').classList.add('open'); switchAuthTab(tab); }
 function switchAuthTab(tab) {
   document.getElementById('loginTab').classList.toggle('active', tab === 'login');
@@ -1601,7 +1608,6 @@ document.addEventListener('click', e => {
 });
 function showMsg(el, text, type) { el.textContent = text; el.className = 'form-msg ' + type; }
 
-// ===== PRODUCTS =====
 function toBanglaNum(n) { return String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]); }
 function discount(p) { return Math.round((p.oldPrice - p.price) / p.oldPrice * 100); }
 
@@ -1678,7 +1684,6 @@ function toggleWishlist(id, e) {
   if (p) showToast((wishlist.has(id)?'❤️ ':'🤍 ')+(currentLang==='bn'?(wishlist.has(id)?'উইশলিস্টে যোগ হয়েছে':'উইশলিস্ট থেকে সরানো হয়েছে'):(wishlist.has(id)?'Added to wishlist':'Removed from wishlist')));
 }
 
-// ===== QUICK VIEW =====
 function openQuickView(id) {
   const p = mangoProducts.find(x=>x.id===id);
   if (!p) return;
@@ -1728,7 +1733,6 @@ function addToCartQv(id) {
   showToast('🛒 '+(currentLang==='bn'?p.nameBn+' কার্টে যোগ হয়েছে!':p.nameEn+' added to cart!'),'success');
 }
 
-// ===== CART =====
 function addToCart(id) {
   const product = mangoProducts.find(p=>p.id===id);
   if (!product) return;
@@ -1800,7 +1804,6 @@ function changeQty(id, delta) {
 function removeFromCart(id) { cart = cart.filter(c=>c.id!==id); saveCart(); updateCartCount(); renderCart(); renderProducts(); updateStickyBar(); }
 function openOrders() { document.getElementById('userDropdown').classList.remove('open'); showToast(currentLang==='bn'?'📦 পূর্ববর্তী কোনো অর্ডার নেই।':'📦 No previous orders.'); }
 
-// ===== NEWSLETTER =====
 function subscribeNewsletter() {
   const email = document.getElementById('nlEmail').value.trim();
   if (!email || !email.includes('@')) { showToast(currentLang==='bn'?'সঠিক ইমেইল দিন।':'Enter a valid email.','error'); return; }
@@ -1808,7 +1811,6 @@ function subscribeNewsletter() {
   showToast('✅ '+(currentLang==='bn'?'সাবস্ক্রাইব সফল! ধন্যবাদ।':'Subscribed! Thank you.'),'success');
 }
 
-// ===== CHECKOUT =====
 function openCheckout() {
   if (!currentUser) { closeModal('cartModal'); openAuth('login'); showToast(currentLang==='bn'?'অর্ডার করতে লগইন করুন।':'Please login to order.'); return; }
   closeModal('cartModal'); checkoutStep=1; renderCheckout();
@@ -1870,7 +1872,6 @@ function checkoutNext() {
 }
 function finishCheckout() { closeModal('checkoutModal'); showToast('🥭 '+(currentLang==='bn'?'অর্ডার সম্পন্ন! ধন্যবাদ।':'Order complete! Thank you.'),'success'); }
 
-// ===== TESTIMONIALS =====
 function renderTestimonials() {
   const isBangla=currentLang==='bn';
   document.getElementById('testimonialsGrid').innerHTML=testimonials.map(t=>`
@@ -1881,7 +1882,6 @@ function renderTestimonials() {
     </div>`).join('');
 }
 
-// ===== CONTACT =====
 function sendContact() {
   const name=document.getElementById('contactName').value.trim();
   const msg=document.getElementById('contactMsg').value.trim();
@@ -1892,11 +1892,9 @@ function sendContact() {
   showToast('✅ '+(currentLang==='bn'?'বার্তা পাঠানো হয়েছে!':'Message sent!'),'success');
 }
 
-// ===== MODAL =====
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 function handleOverlayClick(event,modalId) { if (event.target===document.getElementById(modalId)) closeModal(modalId); }
 
-// ===== TOAST =====
 function showToast(msg, type='') {
   const container=document.getElementById('toastContainer');
   const toast=document.createElement('div');
@@ -1906,7 +1904,6 @@ function showToast(msg, type='') {
   setTimeout(()=>{ toast.style.transition='all 0.3s ease'; toast.style.opacity='0'; toast.style.transform='translateX(100%)'; setTimeout(()=>toast.remove(),300); },3000);
 }
 
-// ===== INIT =====
 updateAuthUI();
 renderProducts();
 renderTestimonials();
